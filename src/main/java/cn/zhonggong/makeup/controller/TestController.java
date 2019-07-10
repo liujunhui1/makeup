@@ -1,4 +1,4 @@
-package cn.zhonggong.makeup;
+package cn.zhonggong.makeup.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

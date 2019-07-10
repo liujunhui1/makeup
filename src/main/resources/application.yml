@@ -9,12 +9,16 @@ spring:
     mode: html5
     cache: false
 
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/makeup?serverTimezone=GMT%2B8&characterEncoding=UTF-8
+    username: root
+    password: root
 
 
+  mail:
+    host: smtp.qq.com
+    username: 1329148394@qq.com
+    password: uwmriieemzrajgah
+    default-encoding: utf-8
 
-#spring:
-#  datasource:
-#    driver-class-name: com.mysql.cj.jdbc.Driver
- #   url: jdbc:mysql://localhost:3306/test
-  #  username: root
-  #  password: root
