@@ -22,3 +22,9 @@ spring:
     password: uwmriieemzrajgah
     default-encoding: utf-8
 
+
+  redis:
+    database: 0
+    host: 127.0.0.1
+    port: 6379
+    timeout: 3000ms
