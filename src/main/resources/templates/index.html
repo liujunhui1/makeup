@@ -38,7 +38,7 @@
                 <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
                 <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                     <li class="layui-nav-item">
-                        <a class="" href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span>商品管理</span></a>
+                        <a class="" data-url="part/order.html"  href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span>商品管理</span></a>
                         <dl class="layui-nav-child">
 							<dd>
 								<a href="javascript:;" kit-target data-options="{url:'part/goods.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
@@ -52,17 +52,45 @@
                     </li>
  
                     <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 订单管理</span></a>
+                        <a href="javascript:;" data-url="part/commit.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 订单管理</span></a>
                         <dl class="layui-nav-child">
-                                <dd>
-                                    <a href="javascript:;" kit-target data-options="{url:'part/order.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
-                                        <i class="layui-icon">&#xe6c6;</i><span>订单列表</span></a>
-                                </dd>
-                                <dd>
-                                    <a href="javascript:;" kit-target data-options="{url:'part/addGoods.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
-                                        <i class="layui-icon">&#xe6c6;</i><span>添加订单</span></a>
-                                </dd>
-                            </dl>
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'part/order.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span>订单列表</span></a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'part/addOrder.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span>添加订单</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span>用户管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'part/user.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span>用户列表</span></a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'part/addUser.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span>添加用户</span></a>
+                            </dd>
+                        </dl>
+                    </li>
+
+                    <li class="layui-nav-item">
+                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 评论管理</span></a>
+                        <dl class="layui-nav-child">
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'part/commit.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span>评论列表</span></a>
+                            </dd>
+                            <dd>
+                                <a href="javascript:;" kit-target data-options="{url:'part/addCommit.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                    <i class="layui-icon">&#xe6c6;</i><span>添加评论</span></a>
+                            </dd>
+                        </dl>
                     </li>
                 </ul>
             </div>
