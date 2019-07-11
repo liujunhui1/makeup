@@ -10,8 +10,8 @@ import java.math.BigDecimal;
  * 军辉
  * 2019-07-10 21:43
  */
-@Entity
 @Data
+@Entity(name = "tb_mycar")
 public class MyCar {
 
     @Id

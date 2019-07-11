@@ -6,12 +6,13 @@ import lombok.Data;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * 军辉
  * 2019-07-10 21:04
  */
-@Entity
+@Entity(name = "tb_user")
 @Data
 public class User {
 

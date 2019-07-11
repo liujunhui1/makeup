@@ -9,8 +9,8 @@ import javax.persistence.Id;
  * 军辉
  * 2019-07-10 21:27
  */
-@Entity
 @Data
+@Entity(name = "tb_address")
 public class Address {
 
     @Id

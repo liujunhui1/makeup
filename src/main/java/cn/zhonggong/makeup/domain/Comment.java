@@ -10,8 +10,8 @@ import java.util.Date;
  * 军辉
  * 2019-07-10 21:29
  */
-@Entity
 @Data
+@Entity(name = "tb_comment")
 public class Comment {
 
     @Id
