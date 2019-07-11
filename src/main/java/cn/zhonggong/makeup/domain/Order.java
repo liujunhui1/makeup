@@ -12,8 +12,8 @@ import java.util.Date;
  * 军辉
  * 2019-07-10 21:45
  */
-@Entity
 @Data
+@Entity(name = "tb_order")
 public class Order {
 
     @Id

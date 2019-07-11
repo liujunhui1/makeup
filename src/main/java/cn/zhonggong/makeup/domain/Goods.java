@@ -11,7 +11,7 @@ import java.math.BigDecimal;
  * 2019-07-10 21:31
  */
 @Data
-@Entity
+@Entity(name = "tb_goods")
 public class Goods {
 
     @Id

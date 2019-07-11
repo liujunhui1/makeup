@@ -10,7 +10,7 @@ import javax.persistence.Id;
  * 2019-07-10 21:36
  */
 @Data
-@Entity
+@Entity(name = "tb_goodstype")
 public class GoodsType {
 
     @Id
