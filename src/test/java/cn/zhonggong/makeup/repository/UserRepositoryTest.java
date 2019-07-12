@@ -26,16 +26,15 @@ public class UserRepositoryTest {
 
     @Test
     public void testAdd() {
-        User user = new User(1, "sdfsdf", "dsfsdf", "23411", 1, 1);
+        User user = new User("123@qq.com", "root", "root", 1, 1);
 
-        //Assert.assertTrue(userService.save(user),1);
+
         Assert.assertNotNull(userService.save(user));
     }
 
     @Test
     public void testFindByName() {
-        User user = userService.findByName("dsfsdf");
-        Assert.assertNotNull(user);
+        Assert.assertNotNull(userService.findByAccount("123@qq.com"));
     }
 
 }

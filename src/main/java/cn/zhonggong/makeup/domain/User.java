@@ -4,9 +4,7 @@ import cn.zhonggong.makeup.enums.SexEnum;
 import cn.zhonggong.makeup.enums.UserTypeEnum;
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 /**
  * 军辉
@@ -17,6 +15,7 @@ import javax.persistence.Table;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private String userAccount;
     private String userName;
@@ -31,12 +30,24 @@ public class User {
     }
 
 
-    public User(Integer id, String userAccount, String userName, String password, Integer userType, Integer sex) {
-        this.id = id;
+    public User(String userAccount, String userName, String password, Integer userType, Integer sex) {
         this.userAccount = userAccount;
         this.userName = userName;
         this.password = password;
         this.userType = userType;
         this.sex = sex;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userAccount='" + userAccount + '\'' +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                ", userType=" + userType +
+                ", temp='" + temp + '\'' +
+                ", sex=" + sex +
+                '}';
     }
 }
