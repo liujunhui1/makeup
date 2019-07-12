@@ -29,6 +29,10 @@ public class User {
     public User() {
     }
 
+    public User(String userAccount, String password) {
+        this.userAccount = userAccount;
+        this.password = password;
+    }
 
     public User(String userAccount, String userName, String password, Integer userType, Integer sex) {
         this.userAccount = userAccount;

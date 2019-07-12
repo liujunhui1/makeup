@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
         } else {
             log.info(user.toString());
             userRepository.save(user);
-            return ResultVOUtil.Success("wqe", 0, null);
+            return ResultVOUtil.Success("用户注册成功");
         }
 
     }
@@ -43,6 +43,7 @@ public class UserServiceImpl implements UserService {
         if (null == user || "".equals(user)) {
             return ResultVOUtil.Fail("账户信息为空");
         }
+        log.info("用户输入的user：" + user);
         User dbUser = userRepository.findUserByUserAccount(user.getUserAccount());
 
         if (null == user) {

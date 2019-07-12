@@ -30,6 +30,13 @@ spring:
     timeout: 3000ms
 
 
+  devtools:
+    remote:
+      restart:
+        enabled: true
+
+
+
 logging:
   level:
     root: info

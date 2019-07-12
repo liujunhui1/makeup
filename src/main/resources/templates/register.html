@@ -8,120 +8,119 @@
     <title>登录</title>
 </head>
 <body>
-    <fieldset class="layui-elem-field layui-field-title" style="margin: 50px 30% 30px 30%; ">
-        <legend>Login</legend>
-    </fieldset>
-    <form class="layui-form">
-        <div class="layui-form-item">
-            <label class="layui-form-label">用户名</label>
-            <div class="layui-input-block">
-                <input style="width: 75%" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
-            </div>
+<fieldset class="layui-elem-field layui-field-title" style="margin: 50px 30% 30px 30%; ">
+    <legend>Login</legend>
+</fieldset>
+<form class="layui-form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">用户名</label>
+        <div class="layui-input-block">
+            <input style="width: 75%" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
         </div>
-        
-        <div class="layui-form-item">
-            <label class="layui-form-label">账号</label>
-            <div class="layui-input-block">
-                <input style="width: 75%" type="text" name="userAccount" lay-verify="userAccount" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
-            </div>
-        </div>
+    </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-                <input style="width: 75%" type="password" name="password" lay-verify="pass" placeholder="请填写6到12位密码" autocomplete="off" class="layui-input">
-            </div>
-            <!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input style="width: 75%" type="text" name="userAccount" lay-verify="userAccount" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
         </div>
+    </div>
 
-        <div class="layui-form-item" pane="">
-            <!-- <label class="layui-form-label">原始复选框</label> -->
-            <div class="layui-input-block">
-                <input type="checkbox" name="forgetPassword" lay-skin="primary" title="记住密码" checked="">
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input style="width: 75%" type="password" name="password" lay-verify="pass" placeholder="请填写6到12位密码" autocomplete="off" class="layui-input">
+        </div>
+        <!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+    </div>
+
+    <div class="layui-form-item" pane="">
+        <!-- <label class="layui-form-label">原始复选框</label> -->
+        <div class="layui-input-block">
+            <input type="checkbox" name="forgetPassword" lay-skin="primary" title="记住密码" checked="">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <div style="margin: 0;">
+                <button class="layui-btn" lay-filter="demo1" style="width:73%">提交</button>
             </div>
         </div>
+    </div>
 
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <div style="margin: 0;">
-                    <button class="layui-btn" lay-submit="" lay-filter="demo1" style="width:73%">提交</button>
-                </div>
-            </div>
-        </div>
-
-    </form>
-    <script src="../static/plugins/layui/layui.js"></script>
-    <script>
-        layui.use(['form', 'layedit', 'laydate'], function(){
-            var form = layui.form
+</form>
+<script src="../static/plugins/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate'], function(){
+        var form = layui.form
             ,layer = layui.layer
             ,layedit = layui.layedit
             ,laydate = layui.laydate;
-            
-            //日期
-            laydate.render({
-                elem: '#date'
-            });
-            laydate.render({
-                elem: '#date1'
-            });
-            
-            //创建一个编辑器
-            var editIndex = layedit.build('LAY_demo_editor');
-            
-            //自定义验证规则
-            form.verify({
-                title: function(value){
-                    if(value.length < 5){
-                        return '标题至少得5个字符啊';
-                    }
-                }
-                ,pass: [
-                    /^[\S]{6,12}$/
-                    ,'密码必须6到12位，且不能出现空格'
-                ]
-                ,content: function(value){
-                    layedit.sync(editIndex);
-                }
-            });
 
-            layui.use('form', function(){
-                var form = layui.form;
-                //监听提交
-                form.on('submit(demo1)', function(data){
-                    var con = {};
-                    con.userName = data.field.userName;
-                    con.userAccount = data.field.userAccount;
-                    con.password = data.field.password;
-                    event.preventDefault();
-                    layui.jquery.ajax({
-                        type:"post",
-                        url:"/user/register",
-                        data:{con:con},
-                        success:function (msg) {
-                            if (msg.code == 1) {
-                                layer.msg("注册成功！");
-                                window.location.href = "{:U('index.html')}";
-                            }else{
-                                layer.msg("注册失败！");
-                                return false;
-                            }
-                            
-                        },
-                        error:function () {
-                            alert("请求失败！");
+        //日期
+        laydate.render({
+            elem: '#date'
+        });
+        laydate.render({
+            elem: '#date1'
+        });
+
+        //创建一个编辑器
+        var editIndex = layedit.build('LAY_demo_editor');
+
+        //自定义验证规则
+        form.verify({
+            title: function(value){
+                if(value.length < 5){
+                    return '标题至少得5个字符啊';
+                }
+            }
+            ,pass: [
+                /^[\S]{6,12}$/
+                ,'密码必须6到12位，且不能出现空格'
+            ]
+            ,content: function(value){
+                layedit.sync(editIndex);
+            }
+        });
+
+        layui.use('form', function(){
+            var form = layui.form;
+            //监听提交
+            form.on('submit(demo1)', function(data){
+                var con = {};
+                con.userName = data.field.userName;
+                con.userAccount = data.field.userAccount;
+                con.password = data.field.password;
+                event.preventDefault();
+                layui.jquery.ajax({
+                    type:"post",
+                    url:"/user/register",
+                    data:{con:con},
+                    success:function (msg) {
+                        if (msg.code == 1) {
+                            layer.msg("注册成功！");
+                            window.location.href = "{:U('index.html')}";
+                        }else{
+                            layer.msg("注册失败！");
+                            return false;
                         }
-                    });
-
+                    },
+                    error:function () {
+                        alert("请求失败！");
+                    }
                 });
+
             });
         });
-    </script>
-    <style>
-        form{
-            width: 515px;
-            margin: 0 auto;
-        }
-    </style>
+    });
+</script>
+<style>
+    form{
+        width: 515px;
+        margin: 0 auto;
+    }
+</style>
 </body>
 </html>
