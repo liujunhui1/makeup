@@ -11,18 +11,18 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin: 50px 30% 30px 30%; ">
         <legend>Login</legend>
     </fieldset>
-    <form class="layui-form" action="/user/login" methods="post">
+    <form class="layui-form">
         <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
-                <input style="width: 75%" type="text" name="userAccount" lay-verify="userAccount" autocomplete="off" placeholder="请输入用户名" class="layui-input">
+                <input style="width: 75%" type="text" name="userName" lay-verify="userName" autocomplete="off" placeholder="请输入用户名" class="layui-input">
             </div>
         </div>
         
         <div class="layui-form-item">
             <label class="layui-form-label">账号</label>
             <div class="layui-input-block">
-                <input style="width: 75%" type="text" name="email" lay-verify="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+                <input style="width: 75%" type="text" name="userAccount" lay-verify="userAccount" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
             </div>
         </div>
 
@@ -84,37 +84,20 @@
                     layedit.sync(editIndex);
                 }
             });
-            
-            //监听提交
-            // form.on('submit(demo1)', function(data){
-            //     let datas = JSON.stringify(data.field);
-            //     $.ajax({
-            //         type:"POST",
-            //         url:" /user/register",
-            //         data:datas,
-            //         dataType:'json',
-            //         success:function(msg){
-            //             if(msg==1){
-            //                 window.location.href = "{:U('index.html')}";   
-            //             }else{
-            //                 alert("登录失败，请重试!");
-            //             }
-            //         }
-            //     });
-            // });
 
             layui.use('form', function(){
                 var form = layui.form;
                 //监听提交
                 form.on('submit(demo1)', function(data){
                     var con = {};
+                    con.userName = data.field.userName;
                     con.userAccount = data.field.userAccount;
                     con.password = data.field.password;
                     event.preventDefault();
                     layui.jquery.ajax({
                         type:"post",
                         url:"/user/register",
-                        data:{con:con,boxNum:data.field.boxNum},
+                        data:{con:con},
                         success:function (msg) {
                             if (msg.code == 1) {
                                 layer.msg("注册成功！");
@@ -126,7 +109,7 @@
                             
                         },
                         error:function () {
-                            alert("hello");
+                            alert("请求失败！");
                         }
                     });
 

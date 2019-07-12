@@ -91,7 +91,7 @@
                         layui.jquery.ajax({
                             type:"post",
                             url:"/user/login",
-                            data:{con:con,boxNum:data.field.boxNum},
+                            data:{con:con},
                             success:function (msg) {
                                 if (msg.code == 1) {
                                     window.location.href = "{:U('index.html')}";
@@ -102,7 +102,7 @@
                                 
                             },
                             error:function () {
-                                alert("hello");
+                                alert("请求失败！");
                             }
                         });
 
