@@ -11,14 +11,21 @@
     <fieldset class="layui-elem-field layui-field-title" style="margin: 50px 30% 30px 30%; ">
         <legend>Login</legend>
     </fieldset>
-    <form class="layui-form" action="/index" methods="post">
+    <form class="layui-form" action="/user/login" methods="post">
         <div class="layui-form-item">
             <label class="layui-form-label">账号</label>
             <div class="layui-input-block">
-                <input style="width: 75%" type="text" name="title" lay-verify="title" autocomplete="off" placeholder="请输入标题" class="layui-input">
+                <input style="width: 75%" type="text" name="username" lay-verify="username" autocomplete="off" placeholder="请输入用户名" class="layui-input">
             </div>
         </div>
         
+        <div class="layui-form-item">
+            <label class="layui-form-label">邮箱</label>
+            <div class="layui-input-block">
+                <input style="width: 75%" type="text" name="email" lay-verify="email" placeholder="请输入邮箱" autocomplete="off" class="layui-input">
+            </div>
+        </div>
+
         <div class="layui-form-item">
             <label class="layui-form-label">密码</label>
             <div class="layui-input-block">
@@ -30,7 +37,7 @@
         <div class="layui-form-item" pane="">
             <!-- <label class="layui-form-label">原始复选框</label> -->
             <div class="layui-input-block">
-                <input type="checkbox" name="like1[write]" lay-skin="primary" title="记住密码" checked="">
+                <input type="checkbox" name="forgetPassword" lay-skin="primary" title="记住密码" checked="">
             </div>
         </div>
 
@@ -39,7 +46,6 @@
                 <div style="margin: 0;">
                     <button class="layui-btn" lay-submit="" lay-filter="demo1" style="width:73%">提交</button>
                 </div>
-                <!-- <button class="layui-btn" lay-submit="" lay-filter="demo1">立即提交</button> -->
             </div>
         </div>
 
@@ -81,17 +87,21 @@
             
             //监听提交
             form.on('submit(demo1)', function(data){
-                layer.alert(JSON.stringify(data.field), {
-                    title: '最终的提交信息'
-                })
-                return false;
+                let datas = JSON.stringify(data.field);
+                $.ajax({
+                    type:"POST",
+                    url:" /user/login",
+                    data:datas,
+                    dataType:'json',
+                    success:function(msg){
+                        if(msg==1){
+                            window.location.href = "{:U('index.html')}";   
+                        }else{
+                            alert("登录失败，请重试!");
+                        }
+                    }
+                });
             });
-            
-            //表单初始赋值
-            form.val('example', {
-                "username": "贤心" // "name": "value"
-                ,"password": "123456"
-            })
         });
     </script>
     <style>
