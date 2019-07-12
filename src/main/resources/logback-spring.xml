@@ -42,7 +42,7 @@
         <!--滚动策略-->
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
             <!--添加路径-->
-            <fileNamePattern>D/makeup_log/error.%d.log</fileNamePattern>
+            <fileNamePattern>D:/makeup_log/error.%d.log</fileNamePattern>
         </rollingPolicy>
     </appender>
 
