@@ -86,20 +86,50 @@
             });
             
             //监听提交
-            form.on('submit(demo1)', function(data){
-                let datas = JSON.stringify(data.field);
-                $.ajax({
-                    type:"POST",
-                    url:" /user/register",
-                    data:datas,
-                    dataType:'json',
-                    success:function(msg){
-                        if(msg==1){
-                            window.location.href = "{:U('index.html')}";   
-                        }else{
-                            alert("登录失败，请重试!");
+            // form.on('submit(demo1)', function(data){
+            //     let datas = JSON.stringify(data.field);
+            //     $.ajax({
+            //         type:"POST",
+            //         url:" /user/register",
+            //         data:datas,
+            //         dataType:'json',
+            //         success:function(msg){
+            //             if(msg==1){
+            //                 window.location.href = "{:U('index.html')}";   
+            //             }else{
+            //                 alert("登录失败，请重试!");
+            //             }
+            //         }
+            //     });
+            // });
+
+            layui.use('form', function(){
+                var form = layui.form;
+                //监听提交
+                form.on('submit(demo1)', function(data){
+                    var con = {};
+                    con.userAccount = data.field.userAccount;
+                    con.password = data.field.password;
+                    event.preventDefault();
+                    layui.jquery.ajax({
+                        type:"post",
+                        url:"/user/register",
+                        data:{con:con,boxNum:data.field.boxNum},
+                        success:function (msg) {
+                            if (msg.code == 1) {
+                                layer.msg("注册成功！");
+                                window.location.href = "{:U('index.html')}";
+                            }else{
+                                layer.msg("注册失败！");
+                                return false;
+                            }
+                            
+                        },
+                        error:function () {
+                            alert("hello");
                         }
-                    }
+                    });
+
                 });
             });
         });
