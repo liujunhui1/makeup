@@ -40,6 +40,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultVO login(User user) {
+        log.info("用户输入的user：yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         if (null == user || "".equals(user)) {
             return ResultVOUtil.Fail("账户信息为空");
         }
