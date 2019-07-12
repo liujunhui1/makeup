@@ -12,12 +12,12 @@
         <legend>Login</legend>
     </fieldset>
     <form class="layui-form" action="/user/login" methods="post">
-        <!-- <div class="layui-form-item">
+        <div class="layui-form-item">
             <label class="layui-form-label">用户名</label>
             <div class="layui-input-block">
                 <input style="width: 75%" type="text" name="userAccount" lay-verify="userAccount" autocomplete="off" placeholder="请输入用户名" class="layui-input">
             </div>
-        </div> -->
+        </div>
         
         <div class="layui-form-item">
             <label class="layui-form-label">账号</label>
@@ -90,7 +90,7 @@
                 let datas = JSON.stringify(data.field);
                 $.ajax({
                     type:"POST",
-                    url:" /user/login",
+                    url:" /user/register",
                     data:datas,
                     dataType:'json',
                     success:function(msg){
