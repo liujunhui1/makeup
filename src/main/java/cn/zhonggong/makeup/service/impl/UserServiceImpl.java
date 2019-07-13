@@ -40,11 +40,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public ResultVO login(User user) {
-        log.info("用户输入的user：yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyy");
         if (null == user || "".equals(user)) {
             return ResultVOUtil.Fail("账户信息为空");
         }
-        log.info("用户输入的user：" + user);
         User dbUser = userRepository.findUserByUserAccount(user.getUserAccount());
 
         if (null == user) {
@@ -57,7 +55,7 @@ public class UserServiceImpl implements UserService {
             log.info("用户输入用户数据的:" + user);
             log.info("数据库中的用户数据:" + dbUser);
 
-            return ResultVOUtil.Success("登录成功");
+            return ResultVOUtil.Success("登录成功",1,user);
         }
 
 
