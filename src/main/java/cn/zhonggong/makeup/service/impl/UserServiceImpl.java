@@ -55,7 +55,7 @@ public class UserServiceImpl implements UserService {
             log.info("用户输入用户数据的:" + user);
             log.info("数据库中的用户数据:" + dbUser);
 
-            return ResultVOUtil.Success("登录成功",1,user);
+            return ResultVOUtil.Success("登录成功", 1, dbUser);
         }
 
 

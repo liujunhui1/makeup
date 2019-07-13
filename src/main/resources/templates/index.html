@@ -1,6 +1,5 @@
-<!DOCTYPE html>
-<html>
-
+<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -21,7 +20,7 @@
             <ul class="layui-nav layui-layout-right kit-nav">
                 <li class="layui-nav-item">
                     <a href="javascript:;">
-                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"> Van
+                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"><span th:text="${localStorage.getItem('userAccount') }"></span>
                     </a>
                     <dl class="layui-nav-child">
                         <dd><a href="javascript:;">基本资料</a></dd>
@@ -116,6 +115,15 @@
                 type: 'iframe'
             }).init();
         });
+        // $(document).ready(function(){
+        //     $.ajax({
+        //         type: "GET",
+        //         url: "/user/login"+XX,
+        //         success:function (data) {
+        //              console.log(data);
+        //         }
+        //     })
+        // });
     </script>
 </body>
 </html>

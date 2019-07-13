@@ -94,7 +94,9 @@
                         password: data.field.password,
                     },
                     success: function (msg) {
+                        console.log(msg.data)
                         if (msg.code == 1) {
+                            localStorage.setItem("userAccount",data.field.userAccount)
                             window.location.href = "/user/index";
                         } else {
                             layer.msg("账号或密码错误！");
