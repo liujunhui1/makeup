@@ -27,4 +27,14 @@ public class ResultVOUtil {
     public static ResultVO Fail(String msg, Integer count, Object data) {
         return new ResultVO(ResultEnum.RESULT_ENUM_FAIL.getCode(), msg, count, data);
     }
+
+    //分页返回数据
+    public static ResultVO<Object> success(long count, Object object) {
+        ResultVO<Object> result = new ResultVO<Object>();
+        result.setCode(ResultEnum.RESULT_ENUM_SUCCESS.getCode());
+        result.setMsg(ResultEnum.RESULT_ENUM_SUCCESS.getMsg());
+        result.setCount(count);
+        result.setData(object);
+        return result;
+    }
 }

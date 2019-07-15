@@ -9,9 +9,9 @@ import lombok.Getter;
 @Getter
 public enum ResultEnum implements CodeEnum {
 
-    RESULT_ENUM_FAIL(0, "fail"),
+    RESULT_ENUM_FAIL(1, "fail"),
 
-    RESULT_ENUM_SUCCESS(1, "success");
+    RESULT_ENUM_SUCCESS(0, "success");
 
     private Integer code;
     private String msg;
@@ -22,5 +22,12 @@ public enum ResultEnum implements CodeEnum {
     ResultEnum(Integer code, String msg) {
         this.code = code;
         this.msg = msg;
+    }
+    public Integer getCode() {
+        return code;
+    }
+
+    public String getMsg() {
+        return msg;
     }
 }

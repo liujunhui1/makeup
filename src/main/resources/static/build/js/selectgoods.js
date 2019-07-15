@@ -2,7 +2,7 @@ layui.use('table', function() {
     var table = layui.table;
     table.render({
         elem : '#test',
-        url : '/function/function',
+        url : '/goods/goods',
         cellMinWidth : 100,
         cols : [
             [
