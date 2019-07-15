@@ -1,4 +1,4 @@
-<!DOCTYPE html SYSTEM "http://www.thymeleaf.org/dtd/xhtml1-strict-thymeleaf-4.dtd">
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
@@ -10,120 +10,134 @@
 </head>
 
 <body>
-    <div class="layui-layout layui-layout-admin kit-layout-admin">
-        <div class="layui-header">
-            <div class="layui-logo">A Ni Ma</div>
-            <div class="layui-logo kit-logo-mobile">A</div>
-            <ul class="layui-nav layui-layout-left kit-nav">
-				<li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
-			</ul>
-            <ul class="layui-nav layui-layout-right kit-nav">
+<div class="layui-layout layui-layout-admin kit-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">A Ni Ma</div>
+        <div class="layui-logo kit-logo-mobile">A</div>
+        <ul class="layui-nav layui-layout-left kit-nav">
+            <li class="layui-nav-item"><a href="javascript:;">商品管理</a></li>
+        </ul>
+        <ul class="layui-nav layui-layout-right kit-nav">
+            <li class="layui-nav-item">
+                <a href="javascript:;">
+                    <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"><span
+                        th:text="${session.user.getUserName()}"></span>
+                </a>
+                <dl class="layui-nav-child">
+                    <dd><a href="javascript:;">基本资料</a></dd>
+                    <dd><a href="javascript:;">安全设置</a></dd>
+                </dl>
+            </li>
+            <li class="layui-nav-item"><a href="javascript:;"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black kit-side">
+        <div class="layui-side-scroll">
+            <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
                 <li class="layui-nav-item">
-                    <a href="javascript:;">
-                        <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"><span th:text="${localStorage.getItem('userAccount') }"></span>
-                    </a>
+                    <a class="" data-url="part/order.html" href="javascript:;"><i class="fa fa-plug"
+                                                                                  aria-hidden="true"></i><span>商品管理</span></a>
                     <dl class="layui-nav-child">
-                        <dd><a href="javascript:;">基本资料</a></dd>
-                        <dd><a href="javascript:;">安全设置</a></dd>
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/goods.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>商品列表</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/addGoods.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>添加商品</span></a>
+                        </dd>
                     </dl>
                 </li>
-                <li class="layui-nav-item"><a href="javascript:;"><i class="fa fa-sign-out" aria-hidden="true"></i> 注销</a></li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-url="part/commit.html" data-name="table" kit-loader><i
+                            class="fa fa-plug" aria-hidden="true"></i><span> 订单管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/order.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>订单列表</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/addOrder.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>添加订单</span></a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i
+                            class="fa fa-plug" aria-hidden="true"></i><span>用户管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/user.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>用户列表</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/addUser.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>添加用户</span></a>
+                        </dd>
+                    </dl>
+                </li>
+
+                <li class="layui-nav-item">
+                    <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i
+                            class="fa fa-plug" aria-hidden="true"></i><span> 评论管理</span></a>
+                    <dl class="layui-nav-child">
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/commit.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>评论列表</span></a>
+                        </dd>
+                        <dd>
+                            <a href="javascript:;" kit-target
+                               data-options="{url:'part/addCommit.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                                <i class="layui-icon">&#xe6c6;</i><span>添加评论</span></a>
+                        </dd>
+                    </dl>
+                </li>
             </ul>
         </div>
-
-        <div class="layui-side layui-bg-black kit-side">
-            <div class="layui-side-scroll">
-                <div class="kit-side-fold"><i class="fa fa-navicon" aria-hidden="true"></i></div>
-                <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
-                <ul class="layui-nav layui-nav-tree" lay-filter="kitNavbar" kit-navbar>
-                    <li class="layui-nav-item">
-                        <a class="" data-url="part/order.html"  href="javascript:;"><i class="fa fa-plug" aria-hidden="true"></i><span>商品管理</span></a>
-                        <dl class="layui-nav-child">
-							<dd>
-								<a href="javascript:;" kit-target data-options="{url:'part/goods.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
-									<i class="layui-icon">&#xe6c6;</i><span>商品列表</span></a>
-							</dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/addGoods.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>添加商品</span></a>
-                            </dd>
-                        </dl>
-                    </li>
- 
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="part/commit.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 订单管理</span></a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/order.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>订单列表</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/addOrder.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>添加订单</span></a>
-                            </dd>
-                        </dl>
-                    </li>
-
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span>用户管理</span></a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/user.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>用户列表</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/addUser.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>添加用户</span></a>
-                            </dd>
-                        </dl>
-                    </li>
-
-                    <li class="layui-nav-item">
-                        <a href="javascript:;" data-url="/components/table/table.html" data-name="table" kit-loader><i class="fa fa-plug" aria-hidden="true"></i><span> 评论管理</span></a>
-                        <dl class="layui-nav-child">
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/commit.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>评论列表</span></a>
-                            </dd>
-                            <dd>
-                                <a href="javascript:;" kit-target data-options="{url:'part/addCommit.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
-                                    <i class="layui-icon">&#xe6c6;</i><span>添加评论</span></a>
-                            </dd>
-                        </dl>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="layui-body" id="container">
-            <!-- 内容主体区域 -->
-            <div style="padding: 15px;">主体内容加载中,请稍等...</div>
-        </div>
     </div>
-    <script src="../static/plugins/layui/layui.js"></script>
-    <script>
-        var message;
-        layui.config({
-            base: '../static/build/js/'
-        }).use(['app', 'message'], function() {
-            var app = layui.app,
+    <div class="layui-body" id="container">
+        <!-- 内容主体区域 -->
+        <div style="padding: 15px;">主体内容加载中,请稍等...</div>
+    </div>
+</div>
+<script src="../static/plugins/layui/layui.js"></script>
+<script>
+    var message;
+    layui.config({
+        base: '../static/build/js/'
+    }).use(['app', 'message'], function () {
+        var app = layui.app,
             $ = layui.jquery,
             layer = layui.layer;
-            //将message设置为全局以便子页面调用
-            message = layui.message;
-            //主入口
-            app.set({
-                type: 'iframe'
-            }).init();
-        });
-        // $(document).ready(function(){
-        //     $.ajax({
-        //         type: "GET",
-        //         url: "/user/login"+XX,
-        //         success:function (data) {
-        //              console.log(data);
-        //         }
-        //     })
-        // });
-    </script>
+        //将message设置为全局以便子页面调用
+        message = layui.message;
+        //主入口
+        app.set({
+            type: 'iframe'
+        }).init();
+    });
+    // $(document).ready(function(){
+    //     $.ajax({
+    //         type: "GET",
+    //         url: "/user/login"+XX,
+    //         success:function (data) {
+    //              console.log(data);
+    //         }
+    //     })
+    // });
+</script>
 </body>
 </html>

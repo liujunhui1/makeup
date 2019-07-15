@@ -20,11 +20,11 @@ public class ResultVOUtil {
         return resultVO;
     }
 
-    public static ResultVO Success(String msg, Integer code, Object data) {
-        return new ResultVO(ResultEnum.RESULT_ENUM_SUCCESS.getCode(), msg, code, data);
+    public static ResultVO Success(String msg, Integer count, Object data) {
+        return new ResultVO(ResultEnum.RESULT_ENUM_SUCCESS.getCode(), msg, count, data);
     }
 
-    public static ResultVO Fail(String msg, Integer code, Object data) {
-        return new ResultVO(ResultEnum.RESULT_ENUM_FAIL.getCode(), msg, code, data);
+    public static ResultVO Fail(String msg, Integer count, Object data) {
+        return new ResultVO(ResultEnum.RESULT_ENUM_FAIL.getCode(), msg, count, data);
     }
 }

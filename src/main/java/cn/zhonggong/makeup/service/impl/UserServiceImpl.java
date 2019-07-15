@@ -8,7 +8,10 @@ import cn.zhonggong.makeup.vo.ResultVO;
 import jdk.nashorn.internal.runtime.options.Option;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * 军辉
@@ -20,6 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private HttpSession httpSession;
 
 
     @Override
@@ -54,8 +60,8 @@ public class UserServiceImpl implements UserService {
         } else {
             log.info("用户输入用户数据的:" + user);
             log.info("数据库中的用户数据:" + dbUser);
-
-            return ResultVOUtil.Success("登录成功", 1, dbUser);
+            httpSession.setAttribute("user", dbUser);
+            return ResultVOUtil.Success("登录成功");
         }
 
 

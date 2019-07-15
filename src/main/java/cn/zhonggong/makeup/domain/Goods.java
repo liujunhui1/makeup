@@ -20,7 +20,6 @@ public class Goods {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    private Integer goodsId;
     private String goodsName;
     private String picture;
     private Integer mainId;
@@ -36,9 +35,8 @@ public class Goods {
     public Goods() {
     }
 
-    public Goods(Integer id, Integer goodsId, String goodsName, String picture, Integer mainId, String mainName, Integer childId, String childName, BigDecimal price, Integer count, BigDecimal freight, String describe, String temp) {
+    public Goods(Integer id, String goodsName, String picture, Integer mainId, String mainName, Integer childId, String childName, BigDecimal price, Integer count, BigDecimal freight, String describe, String temp) {
         this.id = id;
-        this.goodsId = goodsId;
         this.goodsName = goodsName;
         this.picture = picture;
         this.mainId = mainId;
@@ -51,4 +49,6 @@ public class Goods {
         this.describe = describe;
         this.temp = temp;
     }
+
+
 }
