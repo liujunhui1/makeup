@@ -21,7 +21,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"><span
-                        th:text="${session.user.getUserName()}"></span>
+                        >用户名</span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;">基本资料</a></dd>
@@ -44,12 +44,12 @@
                     <dl class="layui-nav-child">
                         <dd>
                             <a href="javascript:;" kit-target
-                               data-options="{url:'part/goods.html',icon:'&#xe6c6;',title:'表格',id:'1'}">
+                               data-options="{url:'/goods/togoods',icon:'&#xe6c6;',title:'商品列表',id:'1'}">
                                 <i class="layui-icon">&#xe6c6;</i><span>商品列表</span></a>
                         </dd>
                         <dd>
                             <a href="javascript:;" kit-target
-                               data-options="{url:'part/addGoods.html',icon:'&#xe6c6;',title:'表格',id:'2'}">
+                               data-options="{url:'/goods/addgoods',icon:'&#xe6c6;',title:'添加商品',id:'2'}">
                                 <i class="layui-icon">&#xe6c6;</i><span>添加商品</span></a>
                         </dd>
                     </dl>

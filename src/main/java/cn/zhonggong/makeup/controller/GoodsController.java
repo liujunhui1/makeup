@@ -28,6 +28,12 @@ public class GoodsController {
         return new ModelAndView("/part/selectgoods");
     }
 
+    @GetMapping("/addgoods")
+    public ModelAndView addPage(){
+        return new ModelAndView("/part/addGoods");
+    }
+
+
 //    @GetMapping("/getall")
 //    public ResultVO getAllGoods() {
 //        List<Goods> goods = goodsService.findAllGoods();
@@ -39,12 +45,11 @@ public class GoodsController {
 //    }
 
 
-
-@RequestMapping(value = "/goods", method = RequestMethod.GET)
-public ResultVO<Object> selectGoods(@RequestParam(defaultValue = "1", name = "page") int page,
-                                 @RequestParam(defaultValue = "10", name = "limit") int limit,
-                                 @RequestParam(defaultValue = "", name = "search") String search) {
-    return goodsService.selectGoods(page - 1, limit, search);
-}
+    @RequestMapping(value = "/goods", method = RequestMethod.GET)
+    public ResultVO<Object> selectGoods(@RequestParam(defaultValue = "1", name = "page") int page,
+                                        @RequestParam(defaultValue = "10", name = "limit") int limit,
+                                        @RequestParam(defaultValue = "", name = "search") String search) {
+        return goodsService.selectGoods(page - 1, limit, search);
+    }
 
 }

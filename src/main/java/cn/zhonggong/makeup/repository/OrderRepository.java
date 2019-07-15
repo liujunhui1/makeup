@@ -10,8 +10,6 @@ import org.springframework.stereotype.Repository;
  * 2019-07-13 9:48
  */
 @Repository
-public interface OrderRepository extends JpaRepository<Order,Integer> {
+public interface OrderRepository extends JpaRepository<Order, Integer> {
 
-    @Query()
-    Order updateOrder();
 }
