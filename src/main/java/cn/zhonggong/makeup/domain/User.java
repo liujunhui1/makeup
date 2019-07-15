@@ -2,9 +2,14 @@ package cn.zhonggong.makeup.domain;
 
 import cn.zhonggong.makeup.enums.SexEnum;
 import cn.zhonggong.makeup.enums.UserTypeEnum;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 /**
  * 军辉
@@ -12,6 +17,7 @@ import javax.persistence.*;
  */
 @Entity(name = "tb_user")
 @Data
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class User {
 
     @Id
@@ -26,8 +32,6 @@ public class User {
     //默认 男
     private Integer sex = SexEnum.Male.getCode();
 
-    public User() {
-    }
 
     public User(String userAccount, String password) {
         this.userAccount = userAccount;

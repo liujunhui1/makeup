@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * 军辉
  * 2019-07-13 9:47
  */
-public interface MyCarRespository extends JpaRepository<MyCar, Integer> {
+public interface MyCarRepository extends JpaRepository<MyCar, Integer> {
 }

@@ -15,7 +15,7 @@ import java.util.List;
  * 2019-07-15 11:22
  */
 @RestController
-@RequestMapping("goodstype")
+@RequestMapping("/goodstype")
 public class GoodsTypeController {
 
 

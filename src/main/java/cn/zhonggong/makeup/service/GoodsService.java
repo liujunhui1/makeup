@@ -1,6 +1,8 @@
 package cn.zhonggong.makeup.service;
 
 import cn.zhonggong.makeup.domain.Goods;
+import cn.zhonggong.makeup.vo.ResultVO;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -12,8 +14,9 @@ public interface GoodsService {
 
     List<Goods> findAllGoods();
 
-   // List<Goods> findByMainName();
+    // List<Goods> findByMainName();
 
     Goods save(Goods goods);
+
 
 }
