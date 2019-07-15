@@ -2,7 +2,6 @@ package cn.zhonggong.makeup.service;
 
 import cn.zhonggong.makeup.domain.Goods;
 import cn.zhonggong.makeup.vo.ResultVO;
-import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -18,5 +17,6 @@ public interface GoodsService {
 
     Goods save(Goods goods);
 
+    ResultVO<Object> selectGoods(int page, int limit, String search);
 
 }
