@@ -21,4 +21,11 @@ public interface GoodsTypeService {
     // get /goodstype/getchildname
     ResultVO findChildName();
 
+    ResultVO findChildNameByMainId(int mainId);
+
+    ResultVO findChildNameByMainName(String mainName);
+
+    ResultVO getNavigation();
+
+
 }

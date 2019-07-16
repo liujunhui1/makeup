@@ -34,8 +34,16 @@ public interface GoodsTypeRepository extends JpaRepository<GoodsType, Integer>, 
     @Query("select distinct mainName from tb_goodstype where mainId  = null")
     List<String> findMainName();
 
-    //    @Query("select distinct mainName from GoodsType where mainId not null")
-//    List<String> findChildName();
+    // @Query("select distinct mainName from GoodsType where mainId not null")
+    // List<String> findChildName();
     @Query("select distinct childName from tb_goodstype where mainId is not null")
     List<String> findChildName();
+
+
+    /*
+  通过一级栏目查找二级栏目
+   */
+    List<String> findChildNameByMainId(int mainId);
+
+    List<String> findChildNameByMainName(String mainName);
 }

@@ -1,6 +1,7 @@
 package cn.zhonggong.makeup.repository;
 
 import cn.zhonggong.makeup.domain.Goods;
+import cn.zhonggong.makeup.vo.ResultVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;

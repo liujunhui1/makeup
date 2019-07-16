@@ -51,4 +51,9 @@ public class GoodsTypeServiceImplTest {
 
         Assert.assertNotEquals(goodsTypeService.findChildName().getCode(), ResultEnum.RESULT_ENUM_FAIL.getCode());
     }
+
+    @Test
+    public void findChildNameByMainId(){
+        Assert.assertNotEquals(goodsTypeService.findChildNameByMainId(1).getCode(),ResultEnum.RESULT_ENUM_FAIL.getCode());
+    }
 }

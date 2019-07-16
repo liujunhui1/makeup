@@ -57,4 +57,27 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 
         }
     }
+
+    @Override
+    public ResultVO findChildNameByMainId(int mainId) {
+        List<String> childNames = goodsTypeRepository.findChildNameByMainId(mainId);
+        log.info("通过一级导航栏id查询其下的二级导航" + childNames);
+        return ResultVOUtil.Success("ok", childNames.size(), childNames);
+    }
+
+    @Override
+    public ResultVO getNavigation() {
+
+        List<String> mainNames = goodsTypeRepository.findMainName();
+        for (String srt : mainNames) {
+            /*List<String> chileNames = goodsTypeRepository.findChildNameByMainId();
+            System.out.println(chileNames);*/
+        }
+        return null;
+    }
+
+    @Override
+    public ResultVO findChildNameByMainName(String mainName) {
+        return null;
+    }
 }
