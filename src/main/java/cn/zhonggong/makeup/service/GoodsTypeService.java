@@ -13,7 +13,7 @@ public interface GoodsTypeService {
 
     GoodsType save(GoodsType goodsType);
 
-    List<String> findMainName();
+    List<GoodsType> findMainName();
 
     List<String> findChildName();
 

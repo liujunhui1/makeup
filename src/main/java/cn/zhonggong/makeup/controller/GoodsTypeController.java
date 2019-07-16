@@ -1,5 +1,6 @@
 package cn.zhonggong.makeup.controller;
 
+import cn.zhonggong.makeup.domain.GoodsType;
 import cn.zhonggong.makeup.service.impl.GoodsTypeServiceImpl;
 import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
@@ -23,13 +24,14 @@ public class GoodsTypeController {
     private GoodsTypeServiceImpl goodsTypeService;
 
     @GetMapping("/getmainname")
-    public ResultVO getMainName() {
-        List<String> mainNameList = goodsTypeService.findMainName();
-        if (null == mainNameList || mainNameList.size() == 0) {
-            return ResultVOUtil.Fail("查询一级导航栏为空");
-        } else {
-            return ResultVOUtil.Success("查询一级导航栏成功", mainNameList.size(), mainNameList);
-        }
+    public List<GoodsType> getMainName() {
+        List<GoodsType> mainNameList = goodsTypeService.findMainName();
+        return mainNameList;
+//        if (null == mainNameList || mainNameList.size() == 0) {
+//            return ResultVOUtil.Fail("查询一级导航栏为空");
+//        } else {
+//            return ResultVOUtil.Success("查询一级导航栏成功", mainNameList.size(), mainNameList);
+//        }
     }
 
     @GetMapping("/getchildname")

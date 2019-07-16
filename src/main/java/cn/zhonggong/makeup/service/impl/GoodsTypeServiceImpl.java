@@ -28,7 +28,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     }
 
     @Override
-    public List<String> findMainName() {
+    public List<GoodsType> findMainName() {
         return goodsTypeRepository.findMainName();
     }
 
