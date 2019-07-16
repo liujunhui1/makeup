@@ -29,10 +29,10 @@ import java.util.List;
 public interface GoodsTypeRepository extends JpaRepository<GoodsType, Integer>, JpaSpecificationExecutor<GoodsType> {
 
     /*
-    from的表名称需要是实体类中的name的值
-     */
-    @Query("select distinct mainName from tb_goodstype where mainId  = null")
-    List<String> findMainName();
+    from的表名称需要是实体类中的name的值*/
+    //@Query("select distinct childName from tb_goodstype where mainId is  null")
+    @Query("select new cn.zhonggong.makeup.domain.GoodsType(g.id, g.mainName) from tb_goodstype g where g.mainId  = null")
+    List<GoodsType> findMainName();
 
     // @Query("select distinct mainName from GoodsType where mainId not null")
     // List<String> findChildName();

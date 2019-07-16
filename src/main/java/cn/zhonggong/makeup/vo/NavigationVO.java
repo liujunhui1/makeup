@@ -10,11 +10,11 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
-public class navigationVO<T> {
+public class NavigationVO<T> {
     private String mainName;
     private T childName;
 
-    public navigationVO(String mainName, T childName) {
+    public NavigationVO(String mainName, T childName) {
         this.mainName = mainName;
         this.childName = childName;
     }

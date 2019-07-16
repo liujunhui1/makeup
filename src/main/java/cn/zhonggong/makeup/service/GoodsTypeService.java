@@ -15,15 +15,14 @@ public interface GoodsTypeService {
     // post /goodstype/addgoodstype
     ResultVO save(GoodsType goodsType);
 
-    // get /goodstype/getmainname
-    ResultVO findMainName();
+    List<GoodsType> findMainName();
 
     // get /goodstype/getchildname
     ResultVO findChildName();
 
     ResultVO findChildNameByMainId(int mainId);
 
-    ResultVO findChildNameByMainName(String mainName);
+    List<String> findChildNameByMainName(String mainName);
 
     ResultVO getNavigation();
 

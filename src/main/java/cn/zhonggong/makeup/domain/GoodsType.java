@@ -10,7 +10,6 @@ import javax.persistence.*;
  */
 @Data
 @Entity(name = "tb_goodstype")
-//@Table(name = "tb_goodstype")
 public class GoodsType {
 
     @Id
@@ -31,5 +30,10 @@ public class GoodsType {
         this.mainId = mainId;
         this.mainName = mainName;
         this.childName = childName;
+    }
+
+    public GoodsType(Integer id, String mainName) {
+        this.id = id;
+        this.mainName = mainName;
     }
 }

@@ -26,7 +26,8 @@ public class GoodsTypeController {
     private GoodsTypeServiceImpl goodsTypeService;
 
     @GetMapping("/getmainname")
-    public ResultVO getMainName() {
+
+    public List<GoodsType> getMainName() {
         return goodsTypeService.findMainName();
     }
 
@@ -39,4 +40,10 @@ public class GoodsTypeController {
     public ResultVO addgoodstype(GoodsType goodsType) {
         return goodsTypeService.save(goodsType);
     }
+
+    @GetMapping("/getnav")
+    public ResultVO getnav() {
+        return goodsTypeService.getNavigation();
+    }
+
 }

@@ -5,10 +5,12 @@ import cn.zhonggong.makeup.repository.GoodsTypeRepository;
 import cn.zhonggong.makeup.service.GoodsTypeService;
 import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
+import cn.zhonggong.makeup.vo.NavigationVO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,7 +26,6 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 
     @Override
     public ResultVO save(GoodsType goodsType) {
-        log.info("商品类型:" + goodsType);
         if (goodsType == null) {
             return ResultVOUtil.Fail("增加商品类型失败");
         } else {
@@ -35,21 +36,13 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     }
 
     @Override
-    public ResultVO findMainName() {
-        List<String> mainNames = goodsTypeRepository.findMainName();
-        log.info("一级导航:" + mainNames);
-        if (mainNames == null || mainNames.size() == 0) {
-            return ResultVOUtil.Fail("查询一级导航失败");
-        } else {
-            return ResultVOUtil.Success("查询一级导航成功", mainNames.size(), mainNames);
-
-        }
+    public List<GoodsType> findMainName() {
+        return goodsTypeRepository.findMainName();
     }
 
     @Override
     public ResultVO findChildName() {
         List<String> childNames = goodsTypeRepository.findChildName();
-        log.info("二级导航：" + childNames);
         if (childNames == null || childNames.size() == 0) {
             return ResultVOUtil.Fail("查询二级导航失败");
         } else {
@@ -66,18 +59,24 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     }
 
     @Override
-    public ResultVO getNavigation() {
+    public List<String> findChildNameByMainName(String mainName) {
 
-        List<String> mainNames = goodsTypeRepository.findMainName();
-        for (String srt : mainNames) {
-            /*List<String> chileNames = goodsTypeRepository.findChildNameByMainId();
-            System.out.println(chileNames);*/
-        }
-        return null;
+        return goodsTypeRepository.findChildNameByMainName(mainName);
+
     }
 
     @Override
-    public ResultVO findChildNameByMainName(String mainName) {
-        return null;
+    public ResultVO getNavigation() {
+        List<NavigationVO> result = new ArrayList<>();
+        List<GoodsType> mainNames = goodsTypeRepository.findMainName();
+        for (GoodsType goodsType : mainNames) {
+            String mainName = goodsType.getMainName();
+            List<String> chileNames = goodsTypeRepository.findChildNameByMainName(mainName);
+            result.add(new NavigationVO(mainName, chileNames));
+        }
+        System.out.println();
+        return ResultVOUtil.Success("导航栏", result.size(), result);
+
     }
+
 }
