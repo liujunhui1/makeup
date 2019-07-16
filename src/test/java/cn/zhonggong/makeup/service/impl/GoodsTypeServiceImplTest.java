@@ -1,7 +1,11 @@
 package cn.zhonggong.makeup.service.impl;
 
 import cn.zhonggong.makeup.domain.GoodsType;
+import cn.zhonggong.makeup.enums.ResultEnum;
 import cn.zhonggong.makeup.repository.GoodsTypeRepository;
+import cn.zhonggong.makeup.service.GoodsTypeService;
+import cn.zhonggong.makeup.util.ResultVOUtil;
+import cn.zhonggong.makeup.vo.ResultVO;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.Assert;
 import org.junit.Test;
@@ -24,32 +28,27 @@ import static org.junit.Assert.*;
 @RunWith(SpringRunner.class)
 public class GoodsTypeServiceImplTest {
 
-    @Autowired
-    private GoodsTypeServiceImpl goodsTypeService;
 
     @Autowired
-    private GoodsTypeRepository goodsTypeRepository;
+    private GoodsTypeService goodsTypeService;
 
     @Test
     public void save() {
         GoodsType goodsType = new GoodsType(998, "test一级分类", "test二级分类");
-        System.out.println(goodsTypeService.save(goodsType));
+        Assert.assertNotEquals(goodsTypeService.save(goodsType), ResultEnum.RESULT_ENUM_SUCCESS.getCode());
     }
 
     @Test
     public void findMainName() {
 
-        List<String> mainNameList = goodsTypeService.findMainName();
-        log.info(mainNameList.toString());
         //Arrays.asList(mainNameList);
-        Assert.assertNotNull(mainNameList);
+        Assert.assertNotEquals(goodsTypeService.findMainName().getCode(), ResultEnum.RESULT_ENUM_FAIL.getCode());
 
     }
 
     @Test
     public void findChildName() {
-        List<String> childNameList = goodsTypeRepository.findChildName();
-        log.info(childNameList.toString());
-        Assert.assertNotNull(childNameList);
+
+        Assert.assertNotEquals(goodsTypeService.findChildName().getCode(), ResultEnum.RESULT_ENUM_FAIL.getCode());
     }
 }
