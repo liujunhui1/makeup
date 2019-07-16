@@ -46,16 +46,5 @@ public class User {
         this.sex = sex;
     }
 
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", userAccount='" + userAccount + '\'' +
-                ", userName='" + userName + '\'' +
-                ", password='" + password + '\'' +
-                ", userType=" + userType +
-                ", temp='" + temp + '\'' +
-                ", sex=" + sex +
-                '}';
-    }
+
 }

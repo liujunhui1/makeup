@@ -33,11 +33,14 @@ public class GoodsServiceImplTest {
         Assert.assertNotNull(goodsList);
     }
 
-/*    @Test
-    public void findByMainName() {
-    }*/
 
     @Test
     public void save() {
+        Goods goods = new Goods();
+        goods.setGoodsName("name");
+        goods.setGoodsDescribe("卡接电话白金卡送大奖是");
+
+        int code = goodsService.save(goods).getCode();
+        Assert.assertNotEquals(code, "0");
     }
 }

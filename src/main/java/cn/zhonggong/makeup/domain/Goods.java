@@ -1,6 +1,8 @@
 package cn.zhonggong.makeup.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Entity(name = "tb_goods")
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Goods {
 
     @Id
@@ -29,14 +32,11 @@ public class Goods {
     private BigDecimal price;
     private Integer count;
     private BigDecimal freight;//运费
-    private String describe;//描述
+    private String goodsDescribe;//描述
     private String temp;
 
-    public Goods() {
-    }
 
-    public Goods(Integer id, String goodsName, String picture, Integer mainId, String mainName, Integer childId, String childName, BigDecimal price, Integer count, BigDecimal freight, String describe, String temp) {
-        this.id = id;
+    public Goods(String goodsName, String picture, Integer mainId, String mainName, Integer childId, String childName, BigDecimal price, Integer count, BigDecimal freight, String goodsDescribe) {
         this.goodsName = goodsName;
         this.picture = picture;
         this.mainId = mainId;
@@ -46,8 +46,7 @@ public class Goods {
         this.price = price;
         this.count = count;
         this.freight = freight;
-        this.describe = describe;
-        this.temp = temp;
+        this.goodsDescribe = goodsDescribe;
     }
 
 

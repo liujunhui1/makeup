@@ -20,21 +20,22 @@ public class ResultVOUtil {
         return resultVO;
     }
 
-    public static ResultVO Success(String msg, Integer count, Object data) {
+    public static ResultVO Success(String msg, long count, Object data) {
         return new ResultVO(ResultEnum.RESULT_ENUM_SUCCESS.getCode(), msg, count, data);
     }
 
-    public static ResultVO Fail(String msg, Integer count, Object data) {
+    public static ResultVO Fail(String msg, long count, Object data) {
         return new ResultVO(ResultEnum.RESULT_ENUM_FAIL.getCode(), msg, count, data);
     }
 
     //分页返回数据
-    public static ResultVO<Object> success(long count, Object object) {
+/*    public static ResultVO<Object> Success(long count, Object object) {
         ResultVO<Object> result = new ResultVO<Object>();
         result.setCode(ResultEnum.RESULT_ENUM_SUCCESS.getCode());
         result.setMsg(ResultEnum.RESULT_ENUM_SUCCESS.getMsg());
         result.setCount(count);
         result.setData(object);
         return result;
-    }
+        return new ResultVO<>(ResultEnum.RESULT_ENUM_SUCCESS.getCode(),ResultEnum.)
+    }*/
 }

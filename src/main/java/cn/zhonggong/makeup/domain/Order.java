@@ -1,7 +1,10 @@
 package cn.zhonggong.makeup.domain;
 
 import cn.zhonggong.makeup.enums.OrderEnum;
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,6 +19,7 @@ import java.util.Date;
  */
 @Data
 @Entity(name = "tb_order")
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Order {
 
     @Id
@@ -31,7 +35,19 @@ public class Order {
     private Integer count;
     private BigDecimal price;
     private Integer status = OrderEnum.ORDER_ENUM_UNPAID.getCode();
+
+    @CreatedDate
     private Date time;//上架时间
 
-
+    public Order(Integer userId, String userName, Integer goodsId, String goodsName, Integer childId, String childName, Integer count, BigDecimal price, Integer status) {
+        this.userId = userId;
+        this.userName = userName;
+        this.goodsId = goodsId;
+        this.goodsName = goodsName;
+        this.childId = childId;
+        this.childName = childName;
+        this.count = count;
+        this.price = price;
+        this.status = status;
+    }
 }

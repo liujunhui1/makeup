@@ -23,33 +23,27 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @RequestMapping(value = "/togoods", method = RequestMethod.GET)
+    @GetMapping("/toselectgoods")
     public ModelAndView toUser(Model model) {
         return new ModelAndView("/part/selectgoods");
     }
 
-    @GetMapping("/addgoods")
-    public ModelAndView addPage(){
+    @GetMapping("/toaddgoods")
+    public ModelAndView addPage() {
         return new ModelAndView("/part/addGoods");
     }
 
 
-//    @GetMapping("/getall")
-//    public ResultVO getAllGoods() {
-//        List<Goods> goods = goodsService.findAllGoods();
-//        if (goods == null || goods.size() == 0) {
-//            return ResultVOUtil.Fail("查询商品数量为空");
-//        } else {
-//            return ResultVOUtil.Success("查询成功", goods.size(), goods);
-//        }
-//    }
-
-
-    @RequestMapping(value = "/goods", method = RequestMethod.GET)
+    @GetMapping("/getgoods")
     public ResultVO<Object> selectGoods(@RequestParam(defaultValue = "1", name = "page") int page,
                                         @RequestParam(defaultValue = "10", name = "limit") int limit,
                                         @RequestParam(defaultValue = "", name = "search") String search) {
         return goodsService.selectGoods(page - 1, limit, search);
+    }
+
+    @PostMapping("/addgoods")
+    public ResultVO addgoods(Goods goods) {
+        return goodsService.save(goods);
     }
 
 }

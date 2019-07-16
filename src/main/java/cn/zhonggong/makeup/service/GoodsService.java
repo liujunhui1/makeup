@@ -15,7 +15,7 @@ public interface GoodsService {
 
     // List<Goods> findByMainName();
 
-    Goods save(Goods goods);
+    ResultVO save(Goods goods);
 
     ResultVO<Object> selectGoods(int page, int limit, String search);
 

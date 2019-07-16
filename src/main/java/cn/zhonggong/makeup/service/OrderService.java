@@ -1,6 +1,7 @@
 package cn.zhonggong.makeup.service;
 
 import cn.zhonggong.makeup.domain.Order;
+import cn.zhonggong.makeup.vo.ResultVO;
 
 /**
  * 军辉
@@ -8,7 +9,7 @@ import cn.zhonggong.makeup.domain.Order;
  */
 public interface OrderService {
 
-    Order save(Order order);
+    ResultVO save(Order order);
 
-
+    ResultVO<Object> selectOrders(int page, int limit, String search);
 }
