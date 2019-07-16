@@ -61,7 +61,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     @Override
     public List<String> findChildNameByMainName(String mainName) {
 
-        return goodsTypeRepository.findChildNameByMainName(mainName);
+        return goodsTypeRepository.findChildNameByMainNameAndMainIdNotNull(mainName);
 
     }
 
@@ -71,7 +71,7 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
         List<GoodsType> mainNames = goodsTypeRepository.findMainName();
         for (GoodsType goodsType : mainNames) {
             String mainName = goodsType.getMainName();
-            List<String> chileNames = goodsTypeRepository.findChildNameByMainName(mainName);
+            List<String> chileNames = goodsTypeRepository.findChildNameByMainNameAndMainIdNotNull(mainName);
             result.add(new NavigationVO(mainName, chileNames));
         }
         System.out.println();

@@ -45,5 +45,5 @@ public interface GoodsTypeRepository extends JpaRepository<GoodsType, Integer>, 
    */
     List<String> findChildNameByMainId(int mainId);
 
-    List<String> findChildNameByMainName(String mainName);
+    List<String> findChildNameByMainNameAndMainIdNotNull(String mainName);
 }
