@@ -1,6 +1,7 @@
 package cn.zhonggong.makeup.service;
 
 import cn.zhonggong.makeup.domain.GoodsType;
+import cn.zhonggong.makeup.vo.ResultVO;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
@@ -11,10 +12,12 @@ import java.util.List;
  */
 public interface GoodsTypeService {
 
-    GoodsType save(GoodsType goodsType);
+    // post /goodstype/addgoodstype
+    ResultVO save(GoodsType goodsType);
 
     List<GoodsType> findMainName();
 
-    List<String> findChildName();
+    // get /goodstype/getchildname
+    ResultVO findChildName();
 
 }
