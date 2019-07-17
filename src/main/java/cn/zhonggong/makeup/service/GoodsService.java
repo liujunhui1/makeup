@@ -19,4 +19,8 @@ public interface GoodsService {
 
     ResultVO<Object> selectGoods(int page, int limit, String search);
 
+    ResultVO findByMainId(int mainId);
+
+    ResultVO findByChildId(int childId);
+
 }

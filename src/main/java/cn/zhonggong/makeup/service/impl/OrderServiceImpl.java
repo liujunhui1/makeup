@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
         Page<Order> page = null;
 
 
-        if (search.equals("")) {
+        if ("".equals(search)) {
             //根据id倒序查询
             sort = new Sort(Sort.Direction.DESC, "id");
             pageable = PageRequest.of(curr, size, sort);
