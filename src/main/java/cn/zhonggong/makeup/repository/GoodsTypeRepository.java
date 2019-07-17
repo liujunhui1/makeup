@@ -4,6 +4,7 @@ import cn.zhonggong.makeup.domain.GoodsType;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -46,4 +47,8 @@ public interface GoodsTypeRepository extends JpaRepository<GoodsType, Integer>, 
     List<String> findChildNameByMainId(int mainId);
 
     List<String> findChildNameByMainNameAndMainIdNotNull(String mainName);
+
+    @Query("select new cn.zhonggong.makeup.domain.GoodsType(g.id, g.mainId, g.childName) from tb_goodstype g where g.mainId = :mainId")
+    List<GoodsType> getchildName(@Param(value = "mainId") int mainId);
+
 }

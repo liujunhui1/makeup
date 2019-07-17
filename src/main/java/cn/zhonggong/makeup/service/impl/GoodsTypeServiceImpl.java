@@ -79,4 +79,8 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
 
     }
 
+    @Override
+    public List<GoodsType> getchildName(int mainId) {
+        return goodsTypeRepository.getchildName(mainId);
+    }
 }

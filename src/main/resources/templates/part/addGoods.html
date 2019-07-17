@@ -46,10 +46,20 @@
     </div>
 
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">商品类别</label>
-            <div class="layui-input-inline" lay-filter="test1">
-                <select name="orgType" lay-filter="Type_filter" id="otype" lay-verify="required">
+        <div class="layui-form" lay-filter="select1">
+            <label class="layui-form-label">商品主类别</label>
+            <div class="layui-input-inline">
+                <select name="mainId" lay-filter="Type_filter" id="otype" lay-verify="required">
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-form" lay-filter="select2">
+            <label class="layui-form-label">商品子类别</label>
+            <div class="layui-input-inline" >
+                <select name="childId" lay-filter="cType_filter" id="ctype" lay-verify="required">
                 </select>
             </div>
         </div>
@@ -62,6 +72,19 @@
         </div>
     </div>
 
+    <div class="layui-upload">
+
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <button type="button" class="layui-btn" id="test1">上传图片</button>
+            <div class="layui-upload-list">
+                <img  style = "width: 200px;hight:200px" class="layui-upload-img" id="demo1">
+                <p id="demoText"></p>
+            </div>
+        </div>
+    </div>
 
     <div class="layui-form-item">
         <div class="layui-input-block">
@@ -78,7 +101,8 @@
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
-            , laydate = layui.laydate;
+            , laydate = layui.laydate
+            ,upload = layui.upload;
         //日期
         laydate.render({
             elem: '#date'
@@ -109,6 +133,33 @@
                 offset: '6px'
             });
             layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
+        });
+
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: '/upload/'
+            ,before: function(obj){
+                //预读本地文件示例，不支持ie8
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                //上传成功
+            }
+            ,error: function(){
+                //演示失败状态，并实现重传
+                var demoText = $('#demoText');
+                demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                demoText.find('.demo-reload').on('click', function(){
+                    uploadInst.upload();
+                });
+            }
         });
 
         //监听提交
@@ -150,10 +201,38 @@
                 $.each(data, function (index, item) {
                     $('#otype').append(new Option(item.mainName, item.id));// 下拉菜单里添加元素
                 });
-                layui.form.render("select");
+                //$("#otype").val("");设置默认选中的值
+                layui.form.render('select','select1');
+                $.ajax({
+                    url: '/goodstype/childname?mainId='+ $("#otype").val(),
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (cdata) {
+                        $.each(cdata, function (cindex, citem) {
+                            $('#ctype').append(new Option(citem.childName, citem.id));// 下拉菜单里添加元素
+                        });
+                        layui.form.render('select','select2');
+                    }
+                })
 //重新渲染 固定写法
             }
         })
+        form.on('select(Type_filter)', function(data){
+            //$('#ctype').html('');
+            $("#ctype").empty();
+            layui.form.render('select','select2');
+            $.ajax({
+                url: '/goodstype/childname?mainId='+ data.value,
+                dataType: 'json',
+                type: 'GET',
+                success: function (cdata) {
+                    $.each(cdata, function (cindex, citem) {
+                        $('#ctype').append(new Option(citem.childName, citem.id));// 下拉菜单里添加元素
+                    });
+                    layui.form.render('select','select2');
+                }
+            })
+        });
     });
 
     layui.use(['rate'], function () {
