@@ -1,12 +1,12 @@
 package cn.zhonggong.makeup.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.List;
 
 /**
  * 军辉
@@ -14,6 +14,7 @@ import java.math.BigDecimal;
  */
 @Data
 @Entity(name = "tb_mycar")
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class MyCar {
 
     @Id
@@ -21,24 +22,37 @@ public class MyCar {
     private Integer id;
 
     private Integer userId;
-    private Integer goodsId;
-    private String goodsName;
-    private String childName;
-    private BigDecimal price;
-    private BigDecimal freight;//运费
-    private BigDecimal totalPrice;//总金额
+
+    /*    private Integer goodsId;
+        private String goodsName;
+
+        private String childName;
+        private BigDecimal price;*/
+
+/*
+    @ElementCollection(targetClass = CarGoods.class)
+    private List<CarGoods> carGoods;
+*/
+
+    //运费
+    private BigDecimal freight;
+    //总金额
+    private BigDecimal totalPrice;
+
     private String temp;
 
-    public MyCar() {
-    }
 
-    public MyCar(Integer id, Integer userId, Integer goodsId, String goodsName, String childName, BigDecimal price, BigDecimal freight, BigDecimal totalPrice, String temp) {
-        this.id = id;
+/*    public MyCar(Integer userId, List<Goods> goods, BigDecimal freight, BigDecimal totalPrice) {
         this.userId = userId;
-        this.goodsId = goodsId;
-        this.goodsName = goodsName;
-        this.childName = childName;
-        this.price = price;
+        this.goods = goods;
+        this.freight = freight;
+        this.totalPrice = totalPrice;
+    }*/
+
+
+    public MyCar(Integer userId, BigDecimal freight, BigDecimal totalPrice, String temp) {
+        this.userId = userId;
+
         this.freight = freight;
         this.totalPrice = totalPrice;
         this.temp = temp;

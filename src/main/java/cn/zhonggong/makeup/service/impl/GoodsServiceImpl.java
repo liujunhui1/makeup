@@ -108,4 +108,14 @@ public class GoodsServiceImpl implements GoodsService {
 
         }
     }
+
+    @Override
+    public ResultVO findById(int id) {
+        if (id <= 0) {
+            return ResultVOUtil.Fail("失败");
+        } else {
+            Goods goods = goodsRepository.findById(id);
+            return ResultVOUtil.Success("查询成功", 1, goods);
+        }
+    }
 }

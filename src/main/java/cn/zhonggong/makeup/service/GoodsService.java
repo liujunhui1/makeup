@@ -23,4 +23,6 @@ public interface GoodsService {
 
     ResultVO findByChildId(int childId);
 
+    ResultVO findById(int id);
+
 }
