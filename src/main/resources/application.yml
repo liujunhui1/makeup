@@ -43,3 +43,8 @@ spring:
 logging:
   level:
     root: info
+
+
+
+preread:
+  uploadPath: d:/imgage/

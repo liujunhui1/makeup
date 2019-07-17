@@ -14,8 +14,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
+import java.util.UUID;
 
 /**
  * 军辉
@@ -118,4 +120,6 @@ public class GoodsServiceImpl implements GoodsService {
             return ResultVOUtil.Success("查询成功", 1, goods);
         }
     }
+
+
 }

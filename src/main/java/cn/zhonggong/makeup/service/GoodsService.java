@@ -2,6 +2,7 @@ package cn.zhonggong.makeup.service;
 
 import cn.zhonggong.makeup.domain.Goods;
 import cn.zhonggong.makeup.vo.ResultVO;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface GoodsService {
     ResultVO findByChildId(int childId);
 
     ResultVO findById(int id);
+
+
 
 }

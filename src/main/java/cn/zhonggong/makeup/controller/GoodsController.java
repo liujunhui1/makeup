@@ -4,10 +4,12 @@ import cn.zhonggong.makeup.domain.Goods;
 import cn.zhonggong.makeup.service.GoodsService;
 import cn.zhonggong.makeup.service.impl.GoodsServiceImpl;
 import cn.zhonggong.makeup.util.ResultVOUtil;
+import cn.zhonggong.makeup.util.UploadUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
@@ -54,6 +56,16 @@ public class GoodsController {
     @GetMapping("/getbychildgoods")
     public ResultVO findByChildId(@RequestParam(value = "childId", required = true, defaultValue = "1") int childId) {
         return goodsService.findByChildId(childId);
+    }
+
+    @GetMapping("/getbyid")
+    public ResultVO findById(@RequestParam(value = "id", required = true) int id) {
+        return goodsService.findById(id);
+    }
+
+    @PostMapping("/uploadpic")
+    public ResultVO uploadPic(@RequestParam("file") MultipartFile file) {
+        return UploadUtil.uploadPic(file);
     }
 
 }
