@@ -51,7 +51,7 @@ public class UserController {
     @GetMapping("/index")
     public ModelAndView Get_index() {
         User CurrentUser = (User) httpSession.getAttribute("user");
-        if (CurrentUser.getUserType() != UserTypeEnum.USER_TYPE_ADMIN.getCode()) {
+        if (UserTypeEnum.USER_TYPE_ADMIN.getCode().equals(CurrentUser.getUserType())) {
             //TODO
             //非管理员账户不能登录后台页面
         }

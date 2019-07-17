@@ -53,7 +53,7 @@ public class GoodsServiceImpl implements GoodsService {
         Page<Goods> page = null;
         try {
             // 查询所有 倒序
-            if (search.equals("")) {
+            if ("".equals(search)) {
                 sort = new Sort(Sort.Direction.DESC, "id");
                 pageable = PageRequest.of(curr, size, sort);
                 page = goodsRepository.findAll(pageable);
@@ -75,5 +75,37 @@ public class GoodsServiceImpl implements GoodsService {
         }
         log.info("商品信息：" + page.getContent());
         return ResultVOUtil.Success("商品查询成功", page.getTotalElements(), page.getContent());
+    }
+
+    @Override
+    public ResultVO findByMainId(int mainId) {
+        List<Goods> goodsList = goodsRepository.findGoodsByMainId(mainId);
+        log.info("根据一级id" + mainId + "查询商品:" + goodsList);
+        if (goodsList == null || goodsList.size() == 0) {
+            goodsList = goodsRepository.findAll();
+            //return ResultVOUtil.Fail("根据一级id查询商品失败");
+            log.info("根据一级id" + mainId + "查询商品无果，因此返回所有商品信息:" + goodsList);
+            return ResultVOUtil.Success("mianId查询无果，返回所有商品信息", goodsList.size(), goodsList);
+        } else {
+
+            return ResultVOUtil.Success("根据一级id查询商品成功", goodsList.size(), goodsList);
+
+        }
+
+    }
+
+    @Override
+    public ResultVO findByChildId(int childId) {
+        List<Goods> goodsList = goodsRepository.findGoodsByMainId(childId);
+        log.info("根据二级id" + childId + "查询商品:" + goodsList);
+        if (goodsList == null || goodsList.size() == 0) {
+            goodsList = goodsRepository.findAll();
+            // return ResultVOUtil.Fail("根据二级id查询商品失败");
+            log.info("根据二级id" + childId + "查询商品无果，因此返回所有商品信息:" + goodsList);
+            return ResultVOUtil.Success("childId查询无果，返回所有商品信息", goodsList.size(), goodsList);
+        } else {
+            return ResultVOUtil.Success("根据二级id查询商品成功", goodsList.size(), goodsList);
+
+        }
     }
 }

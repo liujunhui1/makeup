@@ -46,4 +46,14 @@ public class GoodsController {
         return goodsService.save(goods);
     }
 
+    @GetMapping("/getbymainid")
+    public ResultVO findByMainId(@RequestParam(value = "mianId", required = true, defaultValue = "1") int mianId) {
+        return goodsService.findByMainId(mianId);
+    }
+
+    @GetMapping("/getbychildgoods")
+    public ResultVO findByChildId(@RequestParam(value = "childId", required = true, defaultValue = "1") int childId) {
+        return goodsService.findByChildId(childId);
+    }
+
 }
