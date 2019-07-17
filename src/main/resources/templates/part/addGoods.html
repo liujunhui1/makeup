@@ -46,10 +46,20 @@
     </div>
 
     <div class="layui-form-item">
-        <div class="layui-inline">
-            <label class="layui-form-label">商品类别</label>
-            <div class="layui-input-inline" lay-filter="test1">
-                <select name="orgType" lay-filter="Type_filter" id="otype" lay-verify="required">
+        <div class="layui-form" lay-filter="select1">
+            <label class="layui-form-label">商品主类别</label>
+            <div class="layui-input-inline">
+                <select name="mainId" lay-filter="Type_filter" id="otype" lay-verify="required">
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-form" lay-filter="select2">
+            <label class="layui-form-label">商品子类别</label>
+            <div class="layui-input-inline" >
+                <select name="childId" lay-filter="cType_filter" id="ctype" lay-verify="required">
                 </select>
             </div>
         </div>
@@ -150,10 +160,38 @@
                 $.each(data, function (index, item) {
                     $('#otype').append(new Option(item.mainName, item.id));// 下拉菜单里添加元素
                 });
-                layui.form.render("select");
+                //$("#otype").val("");设置默认选中的值
+                layui.form.render('select','select1');
+                $.ajax({
+                    url: '/goodstype/childname?mainId='+ $("#otype").val(),
+                    dataType: 'json',
+                    type: 'GET',
+                    success: function (cdata) {
+                        $.each(cdata, function (cindex, citem) {
+                            $('#ctype').append(new Option(citem.childName, citem.id));// 下拉菜单里添加元素
+                        });
+                        layui.form.render('select','select2');
+                    }
+                })
 //重新渲染 固定写法
             }
         })
+        form.on('select(Type_filter)', function(data){
+            //$('#ctype').html('');
+            $("#ctype").empty();
+            layui.form.render('select','select2');
+            $.ajax({
+                url: '/goodstype/childname?mainId='+ data.value,
+                dataType: 'json',
+                type: 'GET',
+                success: function (cdata) {
+                    $.each(cdata, function (cindex, citem) {
+                        $('#ctype').append(new Option(citem.childName, citem.id));// 下拉菜单里添加元素
+                    });
+                    layui.form.render('select','select2');
+                }
+            })
+        });
     });
 
     layui.use(['rate'], function () {

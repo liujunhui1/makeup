@@ -36,4 +36,9 @@ public class GoodsType {
         this.id = id;
         this.mainName = mainName;
     }
+    public GoodsType(Integer id , Integer mainId, String childName) {
+        this.id = id;
+        this.mainId = mainId;
+        this.childName = childName;
+    }
 }

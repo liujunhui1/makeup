@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.util.List;
 
@@ -21,12 +22,10 @@ import java.util.List;
 @RequestMapping("/goodstype")
 public class GoodsTypeController {
 
-
-    @Autowired
+   @Autowired
     private GoodsTypeServiceImpl goodsTypeService;
 
     @GetMapping("/getmainname")
-
     public List<GoodsType> getMainName() {
         return goodsTypeService.findMainName();
     }
@@ -44,6 +43,11 @@ public class GoodsTypeController {
     @GetMapping("/getnav")
     public ResultVO getnav() {
         return goodsTypeService.getNavigation();
+    }
+
+    @GetMapping("/childname")
+    public List<GoodsType> childName(int mainId) {
+        return goodsTypeService.getchildName(mainId);
     }
 
 }
