@@ -5,10 +5,7 @@ import cn.zhonggong.makeup.enums.UserTypeEnum;
 import cn.zhonggong.makeup.service.impl.UserServiceImpl;
 import cn.zhonggong.makeup.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpSession;
@@ -45,7 +42,7 @@ public class UserController {
 
     @PostMapping("/register")
     public ResultVO register(User user) {
-        return userService.save(user);
+        return userService.registerUser(user);
     }
 
     @GetMapping("/index")
@@ -55,8 +52,17 @@ public class UserController {
             //TODO
             //非管理员账户不能登录后台页面
         }
-
         return new ModelAndView("index");
+    }
+
+    @GetMapping("/findbyaccount")
+    public ResultVO findByAccount(@RequestParam(value = "userAccount",required = true) String userAccount) {
+        return userService.findByAccount(userAccount);
+    }
+
+    @PutMapping("/updateuser")
+    public ResultVO updateUser(User user) {
+        return userService.updateUser(user);
     }
 
 }

@@ -13,12 +13,17 @@ import org.springframework.stereotype.Service;
 
 public interface UserService {
 
-    ResultVO save(User user);
+    ResultVO registerUser(User user);
 
     User findByName(String userName);
 
-    User findByAccount(String userAccount);
+    ResultVO findByAccount(String userAccount);
 
     ResultVO login(User user);
+
+    /*
+    userAccount 禁止修改
+     */
+    ResultVO updateUser(User user);
 
 }

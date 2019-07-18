@@ -26,5 +26,9 @@ public interface GoodsRepository extends JpaRepository<Goods, Integer>, JpaSpeci
 
     Goods findById(int id);
 
+    List<Goods> findGoodsByMainName(String mainName);
+
+    List<Goods> findGoodsByChildName(String childName);
+
 
 }

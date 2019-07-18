@@ -121,5 +121,23 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
+    @Override
+    public ResultVO findByMainName(String mainName) {
+        if ("".equals(mainName) || null == mainName) {
+            return ResultVOUtil.Fail("mainName为空");
+        } else {
+            List<Goods> goodsList = goodsRepository.findGoodsByMainName(mainName);
+            return ResultVOUtil.Success("根据一级名称查询成功", goodsList.size(), goodsList);
+        }
+    }
 
+    @Override
+    public ResultVO findByChildName(String childName) {
+        if ("".equals(childName) || null == childName) {
+            return ResultVOUtil.Fail("childName为空");
+        } else {
+            List<Goods> goodsList = goodsRepository.findGoodsByChildName(childName);
+            return ResultVOUtil.Success("根据二级名称查询成功", goodsList.size(), goodsList);
+        }
+    }
 }

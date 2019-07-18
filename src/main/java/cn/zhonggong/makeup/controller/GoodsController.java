@@ -68,4 +68,15 @@ public class GoodsController {
         return UploadUtil.uploadPic(file);
     }
 
+    @GetMapping("/getbymainname")
+    public ResultVO findByMainName(@RequestParam(value = "mainname", defaultValue = "1", required = true) String mainName) {
+        return goodsService.findByMainName(mainName);
+    }
+
+    @GetMapping("/getbychildname")
+    public ResultVO findByChildName(@RequestParam(value = "childname", defaultValue = "1", required = true) String childName) {
+        return goodsService.findByChildName(childName);
+    }
+
+
 }
