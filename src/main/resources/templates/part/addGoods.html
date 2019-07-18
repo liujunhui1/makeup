@@ -18,6 +18,8 @@
         </div>
     </div>
 
+    <input type="hidden" id="img_url" name="picture" value=""/>
+
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">商品单价</label>
@@ -138,11 +140,11 @@
         //普通图片上传
         var uploadInst = upload.render({
             elem: '#test1'
-            ,url: '/upload/'
+            ,url: '/goods/uploadpic'
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
                 obj.preview(function(index, file, result){
-                    $('#demo1').attr('src', result); //图片链接（base64）
+                    $('#demo1').attr('src', result); //图片链接（base64
                 });
             }
             ,done: function(res){
@@ -151,6 +153,8 @@
                     return layer.msg('上传失败');
                 }
                 //上传成功
+                alert(res.msg);
+                $('#img_url').attr('value', res.msg); //图片链接（base64）
             }
             ,error: function(){
                 //演示失败状态，并实现重传
@@ -164,22 +168,15 @@
 
         //监听提交
         form.on('submit(demo1)', function (data) {
-            /*layer.alert(JSON.stringify(data.field), {
-                title: '最终的提交信息'
-            })
-            return false;*/
+            var params = $("form").serializeArray();
             event.preventDefault();
-            console.log("点击了立即提交按钮" + JSON.stringify(data.field));
+            $.each(params, function(i, field){
+                console.log("点击了立即提交按钮" + field.name + ":" + field.value + " ");
+            });
             $.ajax({
                 type: "post",
                 url: "/goods/addgoods",
-                data: {
-                    goodsName: data.field.goodsName,
-                    price: data.field.price,
-                    count: data.field.count,
-                    freight: data.field.freight,
-                    goodsDescribe: data.field.goodsDescribe,
-                },
+                data:params,
                 success: function (msg) {
                     console.log(msg.data);
                     if (msg.code == 1) {
