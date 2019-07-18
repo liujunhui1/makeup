@@ -3,6 +3,7 @@ package cn.zhonggong.makeup.service.impl;
 import cn.zhonggong.makeup.domain.Goods;
 import cn.zhonggong.makeup.repository.GoodsRepository;
 import cn.zhonggong.makeup.service.GoodsService;
+import cn.zhonggong.makeup.service.GoodsTypeService;
 import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.util.SpecificationUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
@@ -30,6 +31,9 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsRepository goodsRepository;
 
+    @Autowired
+    private GoodsTypeService typeService;
+
     @Override
     public List<Goods> findAllGoods() {
         return goodsRepository.findAll();
@@ -40,6 +44,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public ResultVO save(Goods goods) {
         log.info("商品信息:" + goods);
+        goods.setChildName(typeService.findChildNameByChildId(goods.getChildId()));
+        goods.setMainName(typeService.findMainNameByChildId(goods.getChildId()));
         if (goods == null) {
             return ResultVOUtil.Fail("商品为空");
         } else {
@@ -127,7 +133,12 @@ public class GoodsServiceImpl implements GoodsService {
             return ResultVOUtil.Fail("mainName为空");
         } else {
             List<Goods> goodsList = goodsRepository.findGoodsByMainName(mainName);
-            return ResultVOUtil.Success("根据一级名称查询成功", goodsList.size(), goodsList);
+            log.info("goodsList:" + goodsList);
+            if (goodsList.size() == 0) {
+                return ResultVOUtil.Fail("所查数据为空");
+            } else {
+                return ResultVOUtil.Success("根据一级名称查询成功", goodsList.size(), goodsList);
+            }
         }
     }
 
@@ -137,7 +148,11 @@ public class GoodsServiceImpl implements GoodsService {
             return ResultVOUtil.Fail("childName为空");
         } else {
             List<Goods> goodsList = goodsRepository.findGoodsByChildName(childName);
-            return ResultVOUtil.Success("根据二级名称查询成功", goodsList.size(), goodsList);
+            if (goodsList.size() == 0) {
+                return ResultVOUtil.Fail("所查数据为空");
+            } else {
+                return ResultVOUtil.Success("根据二级名称查询成功", goodsList.size(), goodsList);
+            }
         }
     }
 }

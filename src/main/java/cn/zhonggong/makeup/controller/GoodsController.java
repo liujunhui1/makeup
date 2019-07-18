@@ -23,7 +23,6 @@ import java.util.List;
 public class GoodsController {
 
 
-
     @Autowired
     private GoodsService goodsService;
 
@@ -34,7 +33,7 @@ public class GoodsController {
 
     @GetMapping("/toselectgoods")
     public ModelAndView toUser(Model model) {
-        return new ModelAndView("/part/selectgoods");
+        return new ModelAndView("/part/goods");
     }
 
     @GetMapping("/toaddgoods")

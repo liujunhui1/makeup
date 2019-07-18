@@ -27,4 +27,8 @@ public interface GoodsTypeService {
     ResultVO getNavigation();
 
     List<GoodsType> getchildName(int mainId);
+
+    String findMainNameByChildId(int id);
+
+    String findChildNameByChildId(int id);
 }

@@ -51,4 +51,11 @@ public interface GoodsTypeRepository extends JpaRepository<GoodsType, Integer>, 
     @Query("select new cn.zhonggong.makeup.domain.GoodsType(g.id, g.mainId, g.childName) from tb_goodstype g where g.mainId = :mainId")
     List<GoodsType> getchildName(@Param(value = "mainId") int mainId);
 
+    @Query(value = "select main_name from tb_goodstype where id = ?", nativeQuery = true)
+    String findMainNameById(int id);
+
+    @Query(value = "select child_name from tb_goodstype where id = ?", nativeQuery = true)
+    String findChildNameById(int id);
+
+
 }
