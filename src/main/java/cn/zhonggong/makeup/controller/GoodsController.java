@@ -22,8 +22,15 @@ import java.util.List;
 @RequestMapping("/goods")
 public class GoodsController {
 
+
+
     @Autowired
     private GoodsService goodsService;
+
+    @GetMapping("/123")
+    public ModelAndView t(Model model) {
+        return new ModelAndView("/part/addGoods");
+    }
 
     @GetMapping("/toselectgoods")
     public ModelAndView toUser(Model model) {

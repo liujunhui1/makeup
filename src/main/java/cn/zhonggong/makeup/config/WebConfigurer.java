@@ -7,8 +7,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 /**
  * 军辉
- * 2019-07-17 21:25
- */
+ * 2019-07-17 21:25*/
+
+
 @Configuration
 public class WebConfigurer implements WebMvcConfigurer {
 
@@ -17,7 +18,6 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/static/**").addResourceLocations("file:///" + path);
-
+        registry.addResourceHandler("/image/**").addResourceLocations("file:///" + path);
     }
 }
