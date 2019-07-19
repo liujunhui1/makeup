@@ -31,4 +31,7 @@ public interface GoodsTypeService {
     String findMainNameByChildId(int id);
 
     String findChildNameByChildId(int id);
+
+
+
 }

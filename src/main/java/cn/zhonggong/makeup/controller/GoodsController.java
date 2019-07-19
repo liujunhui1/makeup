@@ -84,5 +84,16 @@ public class GoodsController {
         return goodsService.findByChildName(childName);
     }
 
+    @DeleteMapping("/deletebyid")
+    public ResultVO deleteById(@RequestParam(value = "id", required = true) int id) {
+        return goodsService.deleteById(id);
+    }
+
+    @PutMapping("/updategoods")
+    public ResultVO updateGoods(Goods goods) {
+        return goodsService.updateGoods(goods);
+
+    }
+
 
 }

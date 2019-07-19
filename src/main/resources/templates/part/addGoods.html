@@ -171,15 +171,16 @@
         form.on('submit(demo1)', function (data) {
             var params = $("form").serializeArray();
             event.preventDefault();
-            $.each(params, function (i, field) {
-                console.log("点击了立即提交按钮" + field.name + ":" + field.value + " ");
-            });
+            /* $.each(params, function (i, field) {
+                 console.log("点击了立即提交按钮" + field.name + ":" + field.value + " ");
+             });*/
+            //console.log("新增商品：" + params);
+
             $.ajax({
                 type: "post",
                 url: "/goods/addgoods",
                 data: params,
                 success: function (msg) {
-                    console.log(msg.data);
                     if (msg.code == 0) {
                         window.location.href = "/goods/toselectgoods";
                     } else {

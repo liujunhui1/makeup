@@ -112,7 +112,7 @@
                 layer.msg('ID：' + data.id + ' 的查看操作');
             } else if (obj.event === 'del') {
                 layer.confirm('真的删除行么', function (index) {
-                    var url = '/function/function?id=' + data.id;
+                    var url = '/goods/deletebyid?id=' + data.id;
                     var dataType = "json";
                     $.ajax({
                         type: "DELETE",

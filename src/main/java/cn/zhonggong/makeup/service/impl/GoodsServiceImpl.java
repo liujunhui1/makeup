@@ -155,4 +155,29 @@ public class GoodsServiceImpl implements GoodsService {
             }
         }
     }
+
+
+    @Override
+    public ResultVO deleteById(int id) {
+        if (id <= 0) {
+            return ResultVOUtil.Fail("id <= 0,请输入一个合法的id值");
+        } else {
+            Goods goods = goodsRepository.findById(id);
+            goodsRepository.deleteById(id);
+            return ResultVOUtil.Success(id + "号商品，" + goods.getGoodsName() + " 删除成功", 1, id);
+        }
+    }
+
+
+    @Override
+    public ResultVO updateGoods(Goods updateGoods) {
+        //Goods dbGood = goodsRepository.findById(updateGoods.getId()).get();
+        if (updateGoods == null) {
+            return ResultVOUtil.Fail("修改商品信息为空");
+        } else {
+
+            goodsRepository.save(updateGoods);
+            return ResultVOUtil.Success("修改成功", 1, updateGoods);
+        }
+    }
 }

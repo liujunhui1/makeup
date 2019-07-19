@@ -30,5 +30,7 @@ public interface GoodsRepository extends JpaRepository<Goods, Integer>, JpaSpeci
 
     List<Goods> findGoodsByChildName(String childName);
 
+    int deleteGoodsById(int id);
+
 
 }

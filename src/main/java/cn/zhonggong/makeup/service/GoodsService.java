@@ -30,5 +30,9 @@ public interface GoodsService {
 
     ResultVO findByChildName(String childName);
 
+    ResultVO deleteById(int id);
+
+    ResultVO updateGoods(Goods goods);
+
 
 }
