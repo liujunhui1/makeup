@@ -22,6 +22,8 @@ public class CarGoods {
 
     private Integer carId;
     private Integer userId;
+
+    @Column(name = "goods_id")
     private Integer goodsId;
     private String goodsName;
     private BigDecimal goodsPrice;

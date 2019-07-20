@@ -1,6 +1,8 @@
 package cn.zhonggong.makeup.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -13,6 +15,7 @@ import javax.persistence.Id;
  */
 @Data
 @Entity(name = "tb_address")
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Address {
 
     @Id
@@ -24,11 +27,9 @@ public class Address {
     private String phone;
     private String temp;
 
-    public Address() {
-    }
 
-    public Address(Integer id, Integer userId, String address, String phone) {
-        this.id = id;
+    public Address(Integer userId, String address, String phone) {
+
         this.userId = userId;
         this.address = address;
         this.phone = phone;
