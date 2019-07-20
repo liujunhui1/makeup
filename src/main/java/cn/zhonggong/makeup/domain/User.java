@@ -15,8 +15,8 @@ import javax.persistence.Id;
  * 军辉
  * 2019-07-10 21:04
  */
-@Entity(name = "tb_user")
 @Data
+@Entity(name = "tb_user")
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class User {
 

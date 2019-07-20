@@ -8,6 +8,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
+import springfox.documentation.service.ApiListing;
 
 import java.util.List;
 
@@ -52,5 +53,15 @@ public class GoodsTypeServiceImplTest {
         List<String> childNames = goodsTypeService.findChildNameByMainName("彩妆");
         log.info(childNames + "");
         Assert.assertNotNull(childNames);
+    }
+
+    @Test
+    public void findMainNameByChildId() {
+
+
+        String mainName = goodsTypeService.findMainNameByChildId(12);
+        log.info("mainName:" + mainName);
+        String childName = goodsTypeService.findChildNameByChildId(12);
+        log.info("childName" + childName);
     }
 }

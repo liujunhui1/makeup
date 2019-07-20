@@ -18,6 +18,6 @@ public class WebConfigurer implements WebMvcConfigurer {
 
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/image/**").addResourceLocations("file:///" + path);
+        registry.addResourceHandler("/images/**").addResourceLocations("file:///" + path);
     }
 }

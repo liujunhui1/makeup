@@ -23,7 +23,6 @@ import java.util.List;
 public class GoodsController {
 
 
-
     @Autowired
     private GoodsService goodsService;
 
@@ -34,7 +33,7 @@ public class GoodsController {
 
     @GetMapping("/toselectgoods")
     public ModelAndView toUser(Model model) {
-        return new ModelAndView("/part/selectgoods");
+        return new ModelAndView("/part/goods");
     }
 
     @GetMapping("/toupdategoods")
@@ -78,5 +77,27 @@ public class GoodsController {
     public ResultVO uploadPic(@RequestParam("file") MultipartFile file) {
         return UploadUtil.uploadPic(file);
     }
+
+    @GetMapping("/getbymainname")
+    public ResultVO findByMainName(@RequestParam(value = "mainname", defaultValue = "1", required = true) String mainName) {
+        return goodsService.findByMainName(mainName);
+    }
+
+    @GetMapping("/getbychildname")
+    public ResultVO findByChildName(@RequestParam(value = "childname", defaultValue = "1", required = true) String childName) {
+        return goodsService.findByChildName(childName);
+    }
+
+    @DeleteMapping("/deletebyid")
+    public ResultVO deleteById(@RequestParam(value = "id", required = true) int id) {
+        return goodsService.deleteById(id);
+    }
+
+    @PutMapping("/updategoods")
+    public ResultVO updateGoods(Goods goods) {
+        return goodsService.updateGoods(goods);
+
+    }
+
 
 }

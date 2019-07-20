@@ -10,4 +10,6 @@ import cn.zhonggong.makeup.vo.ResultVO;
 public interface MyCarService {
 
     ResultVO<MyCar> add(MyCar myCar);
+
+    ResultVO selectMyCayByUserId(int UserId);
 }

@@ -28,18 +28,21 @@ public class UserServiceImpl implements UserService {
     private HttpSession httpSession;
 
 
+    /*
+    调用注册方法之前必须调用 findByAccount() 账户是否存在
+     */
     @Override
-    public ResultVO save(User user) {
+    public ResultVO registerUser(User user) {
         if (null == user || "".equals(user)) {
             return ResultVOUtil.Fail("当前用户信息为空");
         }
-        if (userRepository.findUserByUserAccount(user.getUserAccount()) != null) {
+        if (userRepository.findByUserAccount(user.getUserAccount()) != null) {
             log.info(user.toString());
             return ResultVOUtil.Fail("注册失败，账号已存在");
         } else {
             log.info(user.toString());
             userRepository.save(user);
-            return ResultVOUtil.Success("用户注册成功");
+            return ResultVOUtil.Success("用户注册或修改信息成功");
         }
 
     }
@@ -49,7 +52,7 @@ public class UserServiceImpl implements UserService {
         if (null == user || "".equals(user)) {
             return ResultVOUtil.Fail("账户信息为空");
         }
-        User dbUser = userRepository.findUserByUserAccount(user.getUserAccount());
+        User dbUser = userRepository.findByUserAccount(user.getUserAccount());
 
         if (null == user) {
             return ResultVOUtil.Fail("查无此人，请先注册");
@@ -73,8 +76,33 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User findByAccount(String userAccount) {
+    public ResultVO findByAccount(String userAccount) {
+        log.info("userAccount:" + userAccount);
+        User user = null;
+        if (null == userAccount || "".equals(userAccount)) {
+            return ResultVOUtil.Fail("账户信息为空");
+        }
+        user = userRepository.findByUserAccount(userAccount);
+        log.info("user:" + user);
+        if (null == user || "".equals(user)) {
+            return ResultVOUtil.Fail("账户不存在");
+        } else {
+            return ResultVOUtil.Success("账户信息查询成功", 1, user);
+        }
 
-        return userRepository.findUserByUserAccount(userAccount);
+
+    }
+
+    @Override
+    public ResultVO updateUser(User updateUser) {
+        log.info("修改用户的信息：" + updateUser);
+        User dbUser = userRepository.findByUserAccount(updateUser.getUserAccount());
+        if (dbUser == null || "".equals(dbUser)) {
+            return ResultVOUtil.Fail("将要修改的账户不存在");
+        } else {
+            User user = userRepository.save(updateUser);
+            return ResultVOUtil.Success("修改用户信息成功", 1, user);
+        }
+
     }
 }

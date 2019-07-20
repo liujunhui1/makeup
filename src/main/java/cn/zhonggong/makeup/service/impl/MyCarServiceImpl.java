@@ -35,4 +35,9 @@ public class MyCarServiceImpl implements MyCarService {
         }
 
     }
+
+    @Override
+    public ResultVO selectMyCayByUserId(int UserId) {
+        return null;
+    }
 }

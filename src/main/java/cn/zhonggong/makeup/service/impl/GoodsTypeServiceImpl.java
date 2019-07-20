@@ -83,4 +83,25 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     public List<GoodsType> getchildName(int mainId) {
         return goodsTypeRepository.getchildName(mainId);
     }
+
+    @Override
+    public String findMainNameByChildId(int id) {
+        if (id <= 0) {
+            return "id <= 0,请检查 id 的值";
+        } else {
+            String mainName = goodsTypeRepository.findMainNameById(id);
+            return mainName;
+        }
+
+    }
+
+    @Override
+    public String findChildNameByChildId(int id) {
+        if (id <= 0) {
+            return "id <= 0,请检查 id 的值";
+        }
+        String childName = goodsTypeRepository.findChildNameById(id);
+        return childName;
+
+    }
 }

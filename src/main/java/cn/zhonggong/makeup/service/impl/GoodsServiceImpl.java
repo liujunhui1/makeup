@@ -3,6 +3,7 @@ package cn.zhonggong.makeup.service.impl;
 import cn.zhonggong.makeup.domain.Goods;
 import cn.zhonggong.makeup.repository.GoodsRepository;
 import cn.zhonggong.makeup.service.GoodsService;
+import cn.zhonggong.makeup.service.GoodsTypeService;
 import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.util.SpecificationUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
@@ -30,6 +31,9 @@ public class GoodsServiceImpl implements GoodsService {
     @Autowired
     private GoodsRepository goodsRepository;
 
+    @Autowired
+    private GoodsTypeService typeService;
+
     @Override
     public List<Goods> findAllGoods() {
         return goodsRepository.findAll();
@@ -40,6 +44,8 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public ResultVO save(Goods goods) {
         log.info("商品信息:" + goods);
+        goods.setChildName(typeService.findChildNameByChildId(goods.getChildId()));
+        goods.setMainName(typeService.findMainNameByChildId(goods.getChildId()));
         if (goods == null) {
             return ResultVOUtil.Fail("商品为空");
         } else {
@@ -121,5 +127,57 @@ public class GoodsServiceImpl implements GoodsService {
         }
     }
 
+    @Override
+    public ResultVO findByMainName(String mainName) {
+        if ("".equals(mainName) || null == mainName) {
+            return ResultVOUtil.Fail("mainName为空");
+        } else {
+            List<Goods> goodsList = goodsRepository.findGoodsByMainName(mainName);
+            log.info("goodsList:" + goodsList);
+            if (goodsList.size() == 0) {
+                return ResultVOUtil.Fail("所查数据为空");
+            } else {
+                return ResultVOUtil.Success("根据一级名称查询成功", goodsList.size(), goodsList);
+            }
+        }
+    }
 
+    @Override
+    public ResultVO findByChildName(String childName) {
+        if ("".equals(childName) || null == childName) {
+            return ResultVOUtil.Fail("childName为空");
+        } else {
+            List<Goods> goodsList = goodsRepository.findGoodsByChildName(childName);
+            if (goodsList.size() == 0) {
+                return ResultVOUtil.Fail("所查数据为空");
+            } else {
+                return ResultVOUtil.Success("根据二级名称查询成功", goodsList.size(), goodsList);
+            }
+        }
+    }
+
+
+    @Override
+    public ResultVO deleteById(int id) {
+        if (id <= 0) {
+            return ResultVOUtil.Fail("id <= 0,请输入一个合法的id值");
+        } else {
+            Goods goods = goodsRepository.findById(id);
+            goodsRepository.deleteById(id);
+            return ResultVOUtil.Success(id + "号商品，" + goods.getGoodsName() + " 删除成功", 1, id);
+        }
+    }
+
+
+    @Override
+    public ResultVO updateGoods(Goods updateGoods) {
+        //Goods dbGood = goodsRepository.findById(updateGoods.getId()).get();
+        if (updateGoods == null) {
+            return ResultVOUtil.Fail("修改商品信息为空");
+        } else {
+
+            goodsRepository.save(updateGoods);
+            return ResultVOUtil.Success("修改成功", 1, updateGoods);
+        }
+    }
 }

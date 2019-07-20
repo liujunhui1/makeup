@@ -26,6 +26,13 @@ public interface GoodsService {
 
     ResultVO findById(int id);
 
+    ResultVO findByMainName(String mainName);
+
+    ResultVO findByChildName(String childName);
+
+    ResultVO deleteById(int id);
+
+    ResultVO updateGoods(Goods goods);
 
 
 }

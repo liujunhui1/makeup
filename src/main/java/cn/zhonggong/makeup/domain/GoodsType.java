@@ -20,6 +20,8 @@ public class GoodsType {
 
     @Column(name = "main_name")
     private String mainName;
+
+    @Column(name = "child_name")
     private String childName;
     private String temp;
 
@@ -36,7 +38,8 @@ public class GoodsType {
         this.id = id;
         this.mainName = mainName;
     }
-    public GoodsType(Integer id , Integer mainId, String childName) {
+
+    public GoodsType(Integer id, Integer mainId, String childName) {
         this.id = id;
         this.mainId = mainId;
         this.childName = childName;
