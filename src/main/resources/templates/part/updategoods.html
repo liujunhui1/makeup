@@ -10,21 +10,20 @@
 </head>
 <body>
 <form class="layui-form" action="" style="margin-top: 50px">
+    <input type="hidden" id="goodid" name="id" value=""/>
     <div class="layui-form-item">
         <label class="layui-form-label">商品名称</label>
         <div class="layui-input-block">
-            <input type="text" name="goodsName" lay-verify="title" autocomplete="off" placeholder="请输入新的商品名称"
+            <input type="text" id="goodsName" name="goodsName" lay-verify="title" autocomplete="off" placeholder="请输入新的商品名称"
                    class="layui-input">
         </div>
     </div>
-
-    <input type="hidden" id="img_url" name="picture" value=""/>
-
+    <input type="hidden" id="picture" name="picture" value=""/>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">商品单价</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="price" placeholder="￥" autocomplete="off" class="layui-input">
+                <input type="text" id="price" name="price" placeholder="￥" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -33,7 +32,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品数量</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="count" placeholder="￥" autocomplete="off" class="layui-input">
+                <input type="text" id="count" name="count" placeholder="￥" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -42,7 +41,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品运费</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="freight" placeholder="￥" autocomplete="off" class="layui-input">
+                <input type="text" id="freight" name="freight" placeholder="￥" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -70,7 +69,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">商品描述</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入描述" class="layui-textarea" name="goodsDescribe"></textarea>
+            <textarea placeholder="请输入描述" id="goodsDescribe" class="layui-textarea" name="goodsDescribe"></textarea>
         </div>
     </div>
 
@@ -82,7 +81,7 @@
         <div class="layui-input-block">
             <button type="button" class="layui-btn" id="test8">上传图片</button>
             <div class="layui-upload-list">
-                <img  style = "width: 200px;hight:200px" class="layui-upload-img" id="demo1">
+                <img style = "width: 200px;hight:200px" class="layui-upload-img" id="demo1" src="">
                 <p id="demoText"></p>
             </div>
         </div>
@@ -105,37 +104,6 @@
             , layedit = layui.layedit
             , laydate = layui.laydate
             ,upload = layui.upload;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 2) {
-                    return '标题至少得2个字符啊';
-                }
-            }
-
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
 
         //普通图片上传
         var uploadInst = upload.render({
@@ -198,7 +166,7 @@
                 $.each(data, function (index, item) {
                     $('#otype').append(new Option(item.mainName, item.id));// 下拉菜单里添加元素
                 });
-                //$("#otype").val("");设置默认选中的值
+                //$("#otype").val("7");设置默认选中的值
                 layui.form.render('select','select1');
                 $.ajax({
                     url: '/goodstype/childname?mainId='+ $("#otype").val(),
@@ -232,13 +200,19 @@
         });
     });
 
-    layui.use(['rate'], function () {
-        var rate = layui.rate;
-        //基础效果
-        rate.render({
-            elem: '#test1'
-        })
-    });
+   /* function child(obj){
+       /!* layui.use(['form'], function () {
+            var form = layui.form
+
+        });*!/
+
+       /!* layui.form.render();
+        layui.form.render('select','select1');*!/
+        var select = 'dd[lay-value=' + obj.mainId + ']';
+        $('#otype').siblings("div.layui-form-select").find('dl').find(select).click();
+        //$("#otype").find("option[value = '7']").attr("selected", "selected");
+       // from.render();
+    }*/
 </script>
 
 </body>
