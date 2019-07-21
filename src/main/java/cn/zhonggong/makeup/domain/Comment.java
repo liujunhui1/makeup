@@ -1,6 +1,8 @@
 package cn.zhonggong.makeup.domain;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +16,7 @@ import java.util.Date;
  */
 @Data
 @Entity(name = "tb_comment")
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class Comment {
 
     @Id
@@ -28,8 +31,6 @@ public class Comment {
     private Date time;
     private String temp;
 
-    public Comment() {
-    }
 
     public Comment(Integer id, Integer goodsId, String details, Integer userId, String userAccount, String picture, Date time, String temp) {
         this.id = id;
