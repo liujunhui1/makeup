@@ -12,6 +12,7 @@ import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * 军辉
@@ -104,5 +105,16 @@ public class UserServiceImpl implements UserService {
             return ResultVOUtil.Success("修改用户信息成功", 1, user);
         }
 
+    }
+
+    @Override
+    public ResultVO findAll() {
+        List<User> users = userRepository.findAll();
+        log.info("users:" + users);
+        if (users.size() == 0) {
+            return ResultVOUtil.Fail("当前用户数据为空");
+        } else {
+            return ResultVOUtil.Success("查询用户数据成功", users.size(), users);
+        }
     }
 }

@@ -26,4 +26,6 @@ public interface UserService {
      */
     ResultVO updateUser(User user);
 
+    ResultVO findAll();
+
 }
