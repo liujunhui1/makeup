@@ -36,11 +36,15 @@ public class GoodsController {
         return new ModelAndView("/part/goods");
     }
 
+    @GetMapping("/toupdategoods")
+    public ModelAndView updatePage() {
+        return new ModelAndView("/part/updategoods");
+    }
+
     @GetMapping("/toaddgoods")
     public ModelAndView addPage() {
         return new ModelAndView("/part/addGoods");
     }
-
 
     @GetMapping("/getgoods")
     public ResultVO<Object> selectGoods(@RequestParam(defaultValue = "1", name = "page") int page,

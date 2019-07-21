@@ -10,21 +10,20 @@
 </head>
 <body>
 <form class="layui-form" action="" style="margin-top: 50px">
+    <input type="hidden" id="goodid" name="id" value=""/>
     <div class="layui-form-item">
         <label class="layui-form-label">商品名称</label>
         <div class="layui-input-block">
-            <input type="text" name="goodsName" lay-verify="title" autocomplete="off" placeholder="请输入新的商品名称"
+            <input type="text" id="goodsName" name="goodsName" lay-verify="title" autocomplete="off" placeholder="请输入新的商品名称"
                    class="layui-input">
         </div>
     </div>
-
-    <input type="hidden" id="img_url" name="picture" value=""/>
-
+    <input type="hidden" id="picture" name="picture" value=""/>
     <div class="layui-form-item">
         <div class="layui-inline">
             <label class="layui-form-label">商品单价</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="price" placeholder="￥" autocomplete="off" class="layui-input">
+                <input type="text" id="price" name="price" placeholder="￥" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -33,7 +32,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品数量</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="count" placeholder="￥" autocomplete="off" class="layui-input">
+                <input type="text" id="count" name="count" placeholder="￥" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -42,7 +41,7 @@
         <div class="layui-inline">
             <label class="layui-form-label">商品运费</label>
             <div class="layui-input-inline" style="width: 100px;">
-                <input type="text" name="freight" placeholder="￥" autocomplete="off" class="layui-input">
+                <input type="text" id="freight" name="freight" placeholder="￥" autocomplete="off" class="layui-input">
             </div>
         </div>
     </div>
@@ -60,7 +59,7 @@
     <div class="layui-form-item">
         <div class="layui-form" lay-filter="select2">
             <label class="layui-form-label">商品子类别</label>
-            <div class="layui-input-inline">
+            <div class="layui-input-inline" >
                 <select name="childId" lay-filter="cType_filter" id="ctype" lay-verify="required">
                 </select>
             </div>
@@ -70,7 +69,7 @@
     <div class="layui-form-item layui-form-text">
         <label class="layui-form-label">商品描述</label>
         <div class="layui-input-block">
-            <textarea placeholder="请输入描述" class="layui-textarea" name="goodsDescribe"></textarea>
+            <textarea placeholder="请输入描述" id="goodsDescribe" class="layui-textarea" name="goodsDescribe"></textarea>
         </div>
     </div>
 
@@ -82,7 +81,7 @@
         <div class="layui-input-block">
             <button type="button" class="layui-btn" id="test8">上传图片</button>
             <div class="layui-upload-list">
-                <img style="width: 200px;hight:200px" class="layui-upload-img" id="demo1">
+                <img style = "width: 200px;hight:200px" class="layui-upload-img" id="demo1" src="">
                 <p id="demoText"></p>
             </div>
         </div>
@@ -99,43 +98,12 @@
 <script src="../../static/plugins/layui/layui.js" charset="utf-8"></script>
 <script src="../../static/plugins/layui/jquery-3.2.1.min.js"></script>
 <script>
-    layui.use(['form', 'upload', 'layedit', 'laydate'], function () {
+    layui.use(['form','upload', 'layedit', 'laydate'], function () {
         var form = layui.form
             , layer = layui.layer
             , layedit = layui.layedit
             , laydate = layui.laydate
-            , upload = layui.upload;
-        //日期
-        laydate.render({
-            elem: '#date'
-        });
-        laydate.render({
-            elem: '#date1'
-        });
-
-        //创建一个编辑器
-        var editIndex = layedit.build('LAY_demo_editor');
-
-        //自定义验证规则
-        form.verify({
-            title: function (value) {
-                if (value.length < 2) {
-                    return '标题至少得2个字符啊';
-                }
-            }
-
-            , content: function (value) {
-                layedit.sync(editIndex);
-            }
-        });
-
-        //监听指定开关
-        form.on('switch(switchTest)', function (data) {
-            layer.msg('开关checked：' + (this.checked ? 'true' : 'false'), {
-                offset: '6px'
-            });
-            layer.tips('温馨提示：请注意开关状态的文字可以随意定义，而不仅仅是ON|OFF', data.othis)
-        });
+            ,upload = layui.upload;
 
         //普通图片上传
         var uploadInst = upload.render({
@@ -143,25 +111,24 @@
             ,url: '/goods/uploadpic'
             ,before: function(obj){
                 //预读本地文件示例，不支持ie8
-                obj.preview(function (index, file, result) {
+                obj.preview(function(index, file, result){
                     $('#demo1').attr('src', result); //图片链接（base64
                 });
             }
-            , done: function (res) {
+            ,done: function(res){
                 //如果上传失败
-                if (res.code > 0) {
+                if(res.code > 0){
                     return layer.msg('上传失败');
                 }
                 //上传成功
                 alert(res.msg);
                 $('#img_url').attr('value', res.msg); //图片链接（base64）
-                console.log(res.msg);
             }
-            , error: function () {
+            ,error: function(){
                 //演示失败状态，并实现重传
                 var demoText = $('#demoText');
                 demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
-                demoText.find('.demo-reload').on('click', function () {
+                demoText.find('.demo-reload').on('click', function(){
                     uploadInst.upload();
                 });
             }
@@ -171,17 +138,16 @@
         form.on('submit(demo1)', function (data) {
             var params = $("form").serializeArray();
             event.preventDefault();
-            /* $.each(params, function (i, field) {
-                 console.log("点击了立即提交按钮" + field.name + ":" + field.value + " ");
-             });*/
-            //console.log("新增商品：" + params);
-
+            $.each(params, function(i, field){
+                console.log("点击了立即提交按钮" + field.name + ":" + field.value + " ");
+            });
             $.ajax({
                 type: "post",
                 url: "/goods/addgoods",
-                data: params,
+                data:params,
                 success: function (msg) {
-                    if (msg.code == 0) {
+                    console.log(msg.data);
+                    if (msg.code == 1) {
                         window.location.href = "/goods/toselectgoods";
                     } else {
                         layer.msg("商品添加失败")
@@ -200,46 +166,38 @@
                 $.each(data, function (index, item) {
                     $('#otype').append(new Option(item.mainName, item.id));// 下拉菜单里添加元素
                 });
-                //$("#otype").val("");设置默认选中的值
-                layui.form.render('select', 'select1');
+                //$("#otype").val("7");设置默认选中的值
+                layui.form.render('select','select1');
                 $.ajax({
-                    url: '/goodstype/childname?mainId=' + $("#otype").val(),
+                    url: '/goodstype/childname?mainId='+ $("#otype").val(),
                     dataType: 'json',
                     type: 'GET',
                     success: function (cdata) {
                         $.each(cdata, function (cindex, citem) {
                             $('#ctype').append(new Option(citem.childName, citem.id));// 下拉菜单里添加元素
                         });
-                        layui.form.render('select', 'select2');
+                        layui.form.render('select','select2');
                     }
                 })
 //重新渲染 固定写法
             }
         })
-        form.on('select(Type_filter)', function (data) {
+        form.on('select(Type_filter)', function(data){
             //$('#ctype').html('');
             $("#ctype").empty();
-            layui.form.render('select', 'select2');
+            layui.form.render('select','select2');
             $.ajax({
-                url: '/goodstype/childname?mainId=' + data.value,
+                url: '/goodstype/childname?mainId='+ data.value,
                 dataType: 'json',
                 type: 'GET',
                 success: function (cdata) {
                     $.each(cdata, function (cindex, citem) {
                         $('#ctype').append(new Option(citem.childName, citem.id));// 下拉菜单里添加元素
                     });
-                    layui.form.render('select', 'select2');
+                    layui.form.render('select','select2');
                 }
             })
         });
-    });
-
-    layui.use(['rate'], function () {
-        var rate = layui.rate;
-        //基础效果
-        rate.render({
-            elem: '#test1'
-        })
     });
 </script>
 
