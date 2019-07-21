@@ -30,6 +30,11 @@ public class UserController {
         return new ModelAndView("login");
     }
 
+    @GetMapping("/user")
+    public ModelAndView user() {
+        return new ModelAndView("/part/user");
+    }
+
     @GetMapping("/register")
     public ModelAndView register() {
         return new ModelAndView("register");
