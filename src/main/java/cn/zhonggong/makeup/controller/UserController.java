@@ -61,13 +61,18 @@ public class UserController {
     }
 
     @GetMapping("/findbyaccount")
-    public ResultVO findByAccount(@RequestParam(value = "userAccount",required = true) String userAccount) {
+    public ResultVO findByAccount(@RequestParam(value = "userAccount", required = true) String userAccount) {
         return userService.findByAccount(userAccount);
     }
 
     @PutMapping("/updateuser")
     public ResultVO updateUser(User user) {
         return userService.updateUser(user);
+    }
+
+    @GetMapping("/findall")
+    public ResultVO findAll() {
+        return userService.findAll();
     }
 
 }
