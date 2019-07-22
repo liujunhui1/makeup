@@ -23,5 +23,8 @@ public interface CarGoodsRepository extends JpaRepository<CarGoods, Integer> {
     @Query(value = "delete from tb_mycar_goods where goods_id = ?", nativeQuery = true)
     int deleteByGoodsId(int goodsId);
 
+
+    int deleteById(int id);
+
     List<CarGoods> findByUserId(int userId);
 }

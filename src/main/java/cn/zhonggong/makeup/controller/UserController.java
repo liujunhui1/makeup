@@ -70,4 +70,9 @@ public class UserController {
         return userService.findAll();
     }
 
+    @DeleteMapping("/deletebyid")
+    public ResultVO deleteById(@RequestParam(value = "id", required = true) int id) {
+        return userService.deleteById(id);
+    }
+
 }

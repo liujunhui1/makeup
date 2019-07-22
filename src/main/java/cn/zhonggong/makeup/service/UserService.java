@@ -28,4 +28,6 @@ public interface UserService {
 
     ResultVO findAll();
 
+    ResultVO deleteById(int id);
+
 }

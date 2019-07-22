@@ -3,6 +3,7 @@ package cn.zhonggong.makeup.domain;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -28,6 +29,8 @@ public class Comment {
     private Integer userId;
     private String userAccount;
     private String picture;
+
+    @CreatedDate
     private Date time;
     private String temp;
 

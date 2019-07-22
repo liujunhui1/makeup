@@ -21,4 +21,6 @@ public interface CarGoodsService {
     ResultVO deleteCarGoodsByGoodsId(int goodsId);
 
     ResultVO selectCarGoodsByUserId(int userId);
+
+    ResultVO deleteCarGoodsById(int id);
 }

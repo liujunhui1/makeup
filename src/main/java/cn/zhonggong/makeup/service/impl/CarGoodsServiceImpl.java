@@ -81,4 +81,15 @@ public class CarGoodsServiceImpl implements CarGoodsService {
         log.info("id " + userId + "的用户的购物车" + carGoodsList);
         return ResultVOUtil.Success("查询id " + userId + "的用户的购物车成功", carGoodsList.size(), carGoodsList);
     }
+
+    @Override
+    public ResultVO deleteCarGoodsById(int id) {
+        if (id <= 0) {
+            return ResultVOUtil.Fail("检查商品id是否有误");
+        } else {
+            int result = carGoodsRepository.deleteByGoodsId(id);
+            return ResultVOUtil.Success("删除成功", 1, result);
+
+        }
+    }
 }

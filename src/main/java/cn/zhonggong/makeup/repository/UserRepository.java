@@ -18,6 +18,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
     User findByUserAccount(String userAccount);
 
 
+    void deleteById(int id);
+
+
     /*
     用户账户（邮箱）禁止修改
     update tb_user set user_name = 'test',password = 'test_password' where id = 10;

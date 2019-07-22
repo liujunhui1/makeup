@@ -65,7 +65,7 @@ public class UserServiceImpl implements UserService {
             log.info("用户输入用户数据的:" + user);
             log.info("数据库中的用户数据:" + dbUser);
             httpSession.setAttribute("user", dbUser);
-            return ResultVOUtil.Success("登录成功");
+            return ResultVOUtil.Success("登录成功", 1, dbUser);
         }
 
 
@@ -115,6 +115,16 @@ public class UserServiceImpl implements UserService {
             return ResultVOUtil.Fail("当前用户数据为空");
         } else {
             return ResultVOUtil.Success("查询用户数据成功", users.size(), users);
+        }
+    }
+
+    @Override
+    public ResultVO deleteById(int id) {
+        if (id <= 0) {
+            return ResultVOUtil.Fail("检查id出否有误");
+        } else {
+            userRepository.deleteById(id);
+            return ResultVOUtil.Success("删除用户成功");
         }
     }
 }

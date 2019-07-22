@@ -39,4 +39,9 @@ public class CarGoodsController {
     public ResultVO selectCarGoodsByUserId(@RequestParam(value = "userId", required = true) int userId) {
         return carGoodsService.selectCarGoodsByUserId(userId);
     }
+
+    @DeleteMapping("/deletebyid")
+    public ResultVO deleteCarGoodsById(@RequestParam(value = "id", required = true) int id) {
+        return carGoodsService.deleteCarGoodsById(id);
+    }
 }
