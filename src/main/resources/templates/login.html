@@ -96,8 +96,8 @@
                     success: function (msg) {
                         console.log(msg.data)
                         if (msg.code == 0) {
-                            localStorage.setItem("userAccount",data.field.userAccount)
-                            window.location.href = "/user/index";
+                            //localStorage.setItem("userAccount",data.field.userAccount)
+                            window.location.href = "/index";
                         } else {
                             layer.msg("账号或密码错误！");
                             return false;
