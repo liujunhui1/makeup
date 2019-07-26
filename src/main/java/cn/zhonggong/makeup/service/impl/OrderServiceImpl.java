@@ -1,7 +1,9 @@
 package cn.zhonggong.makeup.service.impl;
 
+import cn.zhonggong.makeup.domain.CarGoods;
 import cn.zhonggong.makeup.domain.Order;
 import cn.zhonggong.makeup.repository.OrderRepository;
+import cn.zhonggong.makeup.service.CarGoodsService;
 import cn.zhonggong.makeup.service.OrderService;
 import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.util.SpecificationUtil;
@@ -15,6 +17,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
 /**
  * 军辉
  * 2019-07-15 13:53
@@ -26,12 +33,32 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Autowired
+    private CarGoodsService carGoodsService;
+
+
     @Override
     public ResultVO save(Order order) {
-        log.info("订单信息：" + order);
+
         if (null == order) {
             return ResultVOUtil.Fail("所添加订单为空");
         } else {
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
+            order.setTime(date);
+
+            List<CarGoods> carGoodsList = (List<CarGoods>) carGoodsService.selectCarGoodsByUserId(order.getUserId()).getData();
+            BigDecimal totalPrice = new BigDecimal(0);
+            for (CarGoods carGoods : carGoodsList) {
+                totalPrice = totalPrice.add(carGoods.getGoodsPrice());
+            }
+            order.setPrice(totalPrice);
+            if (totalPrice.compareTo(new BigDecimal(150)) == 1) {
+                order.setPrice(new BigDecimal(0));
+            } else {
+                order.setPrice(new BigDecimal(10));
+            }
+            log.info("订单信息：" + order);
             orderRepository.save(order);
             return ResultVOUtil.Success("订单添加成功");
         }

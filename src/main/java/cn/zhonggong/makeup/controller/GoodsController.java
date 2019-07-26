@@ -2,8 +2,6 @@ package cn.zhonggong.makeup.controller;
 
 import cn.zhonggong.makeup.domain.Goods;
 import cn.zhonggong.makeup.service.GoodsService;
-import cn.zhonggong.makeup.service.impl.GoodsServiceImpl;
-import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.util.UploadUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.List;
 
 /**
  * 军辉
@@ -26,10 +22,6 @@ public class GoodsController {
     @Autowired
     private GoodsService goodsService;
 
-    @GetMapping("/123")
-    public ModelAndView t(Model model) {
-        return new ModelAndView("/part/addGoods");
-    }
 
     @GetMapping("/toselectgoods")
     public ModelAndView toUser(Model model) {
@@ -59,11 +51,11 @@ public class GoodsController {
     }
 
     @GetMapping("/getbymainid")
-    public ResultVO findByMainId(@RequestParam(value = "mianId", required = true, defaultValue = "1") int mianId) {
-        return goodsService.findByMainId(mianId);
+    public ResultVO findByMainId(@RequestParam(value = "mainId", required = true, defaultValue = "1") int mainId) {
+        return goodsService.findByMainId(mainId);
     }
 
-    @GetMapping("/getbychildgoods")
+    @GetMapping("/getbychildid")
     public ResultVO findByChildId(@RequestParam(value = "childId", required = true, defaultValue = "1") int childId) {
         return goodsService.findByChildId(childId);
     }

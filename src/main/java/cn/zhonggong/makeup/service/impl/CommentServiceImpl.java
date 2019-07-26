@@ -15,6 +15,8 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -35,6 +37,9 @@ public class CommentServiceImpl implements CommentService {
         if (comment == null || "".equals(comment)) {
             return ResultVOUtil.Fail("评论为空");
         } else {
+            Date date = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
+            comment.setTime(date);
             commentRepository.save(comment);
             return ResultVOUtil.Success("添加评论成功", 1, comment);
         }
