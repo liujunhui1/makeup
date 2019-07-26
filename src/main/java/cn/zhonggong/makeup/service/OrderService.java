@@ -12,4 +12,6 @@ public interface OrderService {
     ResultVO save(Order order);
 
     ResultVO<Object> selectOrders(int page, int limit, String search);
+
+    ResultVO deleteById(int id);
 }
