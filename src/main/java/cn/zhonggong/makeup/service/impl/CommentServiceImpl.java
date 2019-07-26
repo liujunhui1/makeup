@@ -3,6 +3,7 @@ package cn.zhonggong.makeup.service.impl;
 import cn.zhonggong.makeup.domain.Comment;
 import cn.zhonggong.makeup.repository.CommentRepository;
 import cn.zhonggong.makeup.service.CommentService;
+import cn.zhonggong.makeup.service.OrderService;
 import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.util.SpecificationUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
@@ -30,6 +31,8 @@ public class CommentServiceImpl implements CommentService {
     @Autowired
     private CommentRepository commentRepository;
 
+    @Autowired
+    private OrderService orderService;
 
     @Override
     public ResultVO addCommit(Comment comment) {

@@ -1,6 +1,7 @@
 package cn.zhonggong.makeup.service.impl;
 
 import cn.zhonggong.makeup.domain.User;
+import cn.zhonggong.makeup.enums.UserTypeEnum;
 import cn.zhonggong.makeup.repository.UserRepository;
 import cn.zhonggong.makeup.service.UserService;
 import cn.zhonggong.makeup.util.ResultVOUtil;
@@ -126,5 +127,29 @@ public class UserServiceImpl implements UserService {
             userRepository.deleteById(id);
             return ResultVOUtil.Success("删除用户成功");
         }
+    }
+
+    @Override
+    public ResultVO adminLogin(User user) {
+        if (null == user || "".equals(user)) {
+            return ResultVOUtil.Fail("账户信息为空");
+        }
+        User dbUser = userRepository.findByUserAccount(user.getUserAccount());
+        log.info("用户输入用户数据的:" + user);
+        log.info("数据库中的用户数据:" + dbUser);
+
+        if (null == user || null == dbUser) {
+            return ResultVOUtil.Fail("查无此人，请先注册");
+
+        } else if (!user.getPassword().equals(dbUser.getPassword())) {
+            return ResultVOUtil.Fail("密码错误");
+        } else if (!UserTypeEnum.USER_TYPE_ADMIN.getCode().equals(dbUser.getUserType())) {
+            //httpSession.setAttribute("user", dbUser);
+            return ResultVOUtil.Fail("非管理员账户禁止登录后台系统");
+        } else {
+            httpSession.setAttribute("user", dbUser);
+            return ResultVOUtil.Success("登录成功", 1, dbUser);
+        }
+
     }
 }

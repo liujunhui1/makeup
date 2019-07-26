@@ -34,6 +34,7 @@ public class Order {
     private Integer childId;
     private String childName;
     private Integer count = 1;
+    private Integer carGoodsId;
     private BigDecimal price;
     private Integer status = OrderEnum.ORDER_ENUM_UNPAID.getCode();
 
@@ -52,4 +53,6 @@ public class Order {
         this.price = price;
         this.status = status;
     }
+
+
 }

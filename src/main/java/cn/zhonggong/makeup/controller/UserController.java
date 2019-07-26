@@ -63,14 +63,15 @@ public class UserController {
     }
 
     @GetMapping("/index")
-    public ResultVO Get_index() {
+    public ModelAndView Get_index() {
         User CurrentUser = (User) httpSession.getAttribute("user");
         if (UserTypeEnum.USER_TYPE_ADMIN.getCode().equals(CurrentUser.getUserType())) {
             //TODO
             //非管理员账户不能登录后台页面
-            return ResultVOUtil.Success("管理员登录后台成功", 1, CurrentUser);
+            //  return ResultVOUtil.Success("管理员登录后台成功", 1, CurrentUser);
+            return new ModelAndView("/index.html");
         }
-        return ResultVOUtil.Fail("非管理员账号不能登录后台");
+        return new ModelAndView("/login.html");
     }
 
     @GetMapping("/findbyaccount")
@@ -93,4 +94,8 @@ public class UserController {
         return userService.deleteById(id);
     }
 
+    @PostMapping("/adminlogin")
+    public ResultVO adminLogin(User user) {
+        return userService.adminLogin(user);
+    }
 }

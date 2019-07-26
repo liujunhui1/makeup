@@ -11,40 +11,40 @@
 <fieldset class="layui-elem-field layui-field-title" style="margin: 50px 30% 30px 30%; ">
     <legend>Login</legend>
 </fieldset>
-    <form class="layui-form" id="form">
-        <div class="layui-form-item">
-            <label class="layui-form-label">账号</label>
-            <div class="layui-input-block">
-                <input style="width: 75%" type="text" name="userAccount" lay-verify="email" placeholder="请输入邮箱"
-                       autocomplete="off" class="layui-input" value="123@qq.com">
+<form class="layui-form" id="form">
+    <div class="layui-form-item">
+        <label class="layui-form-label">账号</label>
+        <div class="layui-input-block">
+            <input style="width: 75%" type="text" name="userAccount" lay-verify="email" placeholder="请输入邮箱"
+                   autocomplete="off" class="layui-input" value="123@qq.com">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <label class="layui-form-label">密码</label>
+        <div class="layui-input-block">
+            <input style="width: 75%" type="password" name="password" lay-verify="pass" placeholder="请填写4到12位密码"
+                   autocomplete="off" class="layui-input" value="root">
+        </div>
+        <!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
+    </div>
+
+    <div class="layui-form-item" pane="">
+        <!-- <label class="layui-form-label">原始复选框</label> -->
+        <div class="layui-input-block">
+            <input type="checkbox" name="forgetPassword" lay-skin="primary" title="记住密码" checked="">
+        </div>
+    </div>
+
+    <div class="layui-form-item">
+        <div class="layui-input-block">
+            <div style="margin: 0;">
+                <button class="layui-btn" lay-submit lay-filter="*" id="layui-btn" style="width:73%">提交</button>
             </div>
         </div>
+    </div>
 
-        <div class="layui-form-item">
-            <label class="layui-form-label">密码</label>
-            <div class="layui-input-block">
-                <input style="width: 75%" type="password" name="password" lay-verify="pass" placeholder="请填写4到12位密码"
-                       autocomplete="off" class="layui-input" value="root">
-            </div>
-            <!-- <div class="layui-form-mid layui-word-aux">请填写6到12位密码</div> -->
-        </div>
-
-        <div class="layui-form-item" pane="">
-            <!-- <label class="layui-form-label">原始复选框</label> -->
-            <div class="layui-input-block">
-                <input type="checkbox" name="forgetPassword" lay-skin="primary" title="记住密码" checked="">
-            </div>
-        </div>
-
-        <div class="layui-form-item">
-            <div class="layui-input-block">
-                <div style="margin: 0;">
-                    <button class="layui-btn"  lay-submit lay-filter="*" id="layui-btn"  style="width:73%" >提交</button>
-                </div>
-            </div>
-        </div>
-
-    </form>
+</form>
 <script src="../static/plugins/layui/jquery-3.2.1.min.js"></script>
 <script src="../static/plugins/layui/layui.js"></script>
 <script>
@@ -85,10 +85,10 @@
             var form = layui.form;
             //监听提交
             form.on('submit(*)', function (data) {
-               event.preventDefault();
+                event.preventDefault();
                 $.ajax({
                     type: "POST",
-                    url: "/user/login",
+                    url: "/user/adminlogin",
                     data: {
                         userAccount: data.field.userAccount,
                         password: data.field.password,
@@ -96,10 +96,10 @@
                     success: function (msg) {
                         console.log(msg.data)
                         if (msg.code == 0) {
-                            localStorage.setItem("userAccount",data.field.userAccount)
+                            localStorage.setItem("userAccount", data.field.userAccount)
                             window.location.href = "/user/index";
                         } else {
-                            layer.msg("账号或密码错误！");
+                            layer.msg(msg.msg);
                             return false;
                         }
 

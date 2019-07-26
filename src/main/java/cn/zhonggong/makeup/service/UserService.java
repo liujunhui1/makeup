@@ -30,4 +30,6 @@ public interface UserService {
 
     ResultVO deleteById(int id);
 
+    ResultVO adminLogin(User user);
+
 }

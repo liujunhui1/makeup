@@ -33,8 +33,6 @@ public class OrderServiceImpl implements OrderService {
     @Autowired
     private OrderRepository orderRepository;
 
-    @Autowired
-    private CarGoodsService carGoodsService;
 
 
     @Override
@@ -47,17 +45,13 @@ public class OrderServiceImpl implements OrderService {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd kk:mm:ss ");
             order.setTime(date);
 
-            List<CarGoods> carGoodsList = (List<CarGoods>) carGoodsService.selectCarGoodsByUserId(order.getUserId()).getData();
+         /*   List<CarGoods> carGoodsList = (List<CarGoods>) carGoodsService.selectCarGoodsByUserId(order.getUserId()).getData();
             BigDecimal totalPrice = new BigDecimal(0);
             for (CarGoods carGoods : carGoodsList) {
                 totalPrice = totalPrice.add(carGoods.getGoodsPrice());
             }
-            order.setPrice(totalPrice);
-            if (totalPrice.compareTo(new BigDecimal(150)) == 1) {
-                order.setPrice(new BigDecimal(0));
-            } else {
-                order.setPrice(new BigDecimal(10));
-            }
+            order.setPrice(totalPrice);*/
+
             log.info("订单信息：" + order);
             orderRepository.save(order);
             return ResultVOUtil.Success("订单添加成功");

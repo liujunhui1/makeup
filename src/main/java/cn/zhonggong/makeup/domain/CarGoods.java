@@ -37,4 +37,5 @@ public class CarGoods {
         this.goodsPrice = goodsPrice;
         this.goodsCount = goodsCount;
     }
+
 }

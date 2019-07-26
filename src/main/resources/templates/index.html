@@ -21,7 +21,7 @@
             <li class="layui-nav-item">
                 <a href="javascript:;">
                     <img src="http://m.zhengjinfan.cn/images/0.jpg" class="layui-nav-img"><span
-                        >用户名</span>
+                        th:text="${session.user.getUserName()}" th:if="${session.user != null}">用户名</span>
                 </a>
                 <dl class="layui-nav-child">
                     <dd><a href="javascript:;">基本资料</a></dd>
