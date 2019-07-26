@@ -96,8 +96,10 @@
                     success: function (msg) {
                         console.log(msg.data)
                         if (msg.code == 0) {
+
                             localStorage.setItem("userAccount", data.field.userAccount)
                             window.location.href = "/user/index";
+
                         } else {
                             layer.msg(msg.msg);
                             return false;
