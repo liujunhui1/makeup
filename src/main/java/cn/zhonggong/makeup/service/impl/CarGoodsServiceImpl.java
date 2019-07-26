@@ -31,8 +31,26 @@ public class CarGoodsServiceImpl implements CarGoodsService {
             return ResultVOUtil.Fail("所添加商品为空,请检查后再添加");
         } else {
             log.info("所添加的商品：" + carGoods);
-            carGoodsRepository.save(carGoods);
-            return ResultVOUtil.Success("已添加商品" + carGoods + "至购物车", 1, carGoods);
+            carGoods.setGoodsCount(1);
+            CarGoods dbCargoods = carGoodsRepository.findByGoodsId(carGoods.getGoodsId());
+
+            /*首先获取当前用户的购物车商品
+             *查看当前商品是否在购物车内
+             * 如果在。其数量 ＋ 当前商品的数量（1），
+             * 如果不在，增加其对象至数据库
+             * */
+            //说明此物品已存在购物车内
+            List<CarGoods> carGoodsList = carGoodsRepository.findByUserId(carGoods.getUserId());
+            log.info("userId： " + carGoods.getUserId() + " 的购物车商品：" + carGoodsList);
+            if (carGoodsList.contains(dbCargoods)) {
+                log.info("此物品已存在购物车其数据：" + dbCargoods);
+                dbCargoods.setGoodsCount(dbCargoods.getGoodsCount() + carGoods.getGoodsCount());
+                return ResultVOUtil.Success("已添加商品" + carGoods + "至购物车", 1, carGoods);
+            } else {
+                carGoodsRepository.save(carGoods);
+                return ResultVOUtil.Success("已添加商品" + carGoods + "至购物车", 1, carGoods);
+            }
+
         }
     }
 
@@ -56,12 +74,17 @@ public class CarGoodsServiceImpl implements CarGoodsService {
         if (goodsId <= 0) {
             return ResultVOUtil.Fail("检查商品id是否有误");
         } else {
-            if (ResultEnum.RESULT_ENUM_SUCCESS.getCode().equals(selectCarGoodsByGoodsId(goodsId).getCode())) {
+            CarGoods carGoods = carGoodsRepository.findByGoodsId(goodsId);
+            if (carGoods == null) {
+                return ResultVOUtil.Fail("商品不存在您的购物车中");
+            } else if (carGoods.getGoodsCount() == 1) {
                 carGoodsRepository.deleteByGoodsId(goodsId);
                 return ResultVOUtil.Success("从购物车中删除 " + goodsId + " 号的商品成功");
             } else {
-                return ResultVOUtil.Fail("商品不存在您的购物车中");
+                carGoods.setGoodsCount(carGoods.getGoodsCount() - 1);
+                return ResultVOUtil.Success("从购物车中 " + goodsId + " 号的商品,数量 - 1");
             }
+
         }
     }
 

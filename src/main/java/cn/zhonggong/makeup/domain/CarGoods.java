@@ -27,7 +27,7 @@ public class CarGoods {
     private Integer goodsId;
     private String goodsName;
     private BigDecimal goodsPrice;
-    private Integer goodsCount;
+    private Integer goodsCount = 1;
 
     public CarGoods(Integer carId, Integer userId, Integer goodsId, String goodsName, BigDecimal goodsPrice, Integer goodsCount) {
         this.carId = carId;

@@ -104,7 +104,7 @@ public class GoodsServiceImpl implements GoodsService {
 
     @Override
     public ResultVO findByChildId(int childId) {
-        List<Goods> goodsList = goodsRepository.findGoodsByMainId(childId);
+        List<Goods> goodsList = goodsRepository.findGoodsByChildId(childId);
         log.info("根据二级id" + childId + "查询商品:" + goodsList);
         if (goodsList == null || goodsList.size() == 0) {
             goodsList = goodsRepository.findAll();

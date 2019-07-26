@@ -30,7 +30,7 @@ public class AddressController {
 
     @PutMapping("/updatebyid")
     public ResultVO updateById(Address address) {
-        return updateById(address);
+        return addressService.updateById(address);
     }
 
     @DeleteMapping("/deletebyid")

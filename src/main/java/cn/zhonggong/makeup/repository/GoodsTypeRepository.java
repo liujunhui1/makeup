@@ -31,14 +31,17 @@ public interface GoodsTypeRepository extends JpaRepository<GoodsType, Integer>, 
 
     /*
     from的表名称需要是实体类中的name的值*/
-    //@Query("select distinct childName from tb_goodstype where mainId is  null")
-    @Query("select new cn.zhonggong.makeup.domain.GoodsType(g.id, g.mainName) from tb_goodstype g where g.mainId  = null")
+    //@Query("select distinct mainName childName from tb_goodstype where mainId is  null")
+    @Query("select new cn.zhonggong.makeup.domain.GoodsType(g.id,g.mainName) from tb_goodstype g where g.mainId is null")
     List<GoodsType> findMainName();
 
     // @Query("select distinct mainName from GoodsType where mainId not null")
     // List<String> findChildName();
     @Query("select distinct childName from tb_goodstype where mainId is not null")
     List<String> findChildName();
+
+
+
 
 
     /*

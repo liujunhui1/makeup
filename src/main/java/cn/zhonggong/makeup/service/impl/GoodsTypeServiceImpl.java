@@ -69,12 +69,14 @@ public class GoodsTypeServiceImpl implements GoodsTypeService {
     public ResultVO getNavigation() {
         List<NavigationVO> result = new ArrayList<>();
         List<GoodsType> mainNames = goodsTypeRepository.findMainName();
+        log.info("mainNames:" + mainNames);
+
         for (GoodsType goodsType : mainNames) {
             String mainName = goodsType.getMainName();
             List<String> chileNames = goodsTypeRepository.findChildNameByMainNameAndMainIdNotNull(mainName);
             result.add(new NavigationVO(mainName, chileNames));
         }
-        System.out.println();
+        log.info("导航栏：" + result);
         return ResultVOUtil.Success("导航栏", result.size(), result);
 
     }

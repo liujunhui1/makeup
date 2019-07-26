@@ -58,7 +58,7 @@ public class AddressServiceImpl implements AddressService {
 
     @Override
     public ResultVO updateById(Address updateAddress) {
-
+        log.info("修改的地址：" + updateAddress);
         if (updateAddress == null || "".equals(updateAddress)) {
             return ResultVOUtil.Fail("地址为空");
         } else {

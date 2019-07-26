@@ -106,7 +106,7 @@
                         password: data.field.password,
                     },
                     success: function (msg) {
-                        if (msg.code == 1) {
+                        if (msg.code == 0) {
                             layer.msg("注册成功！");
                             window.location.href = "/user/index";
                         } else {
