@@ -41,7 +41,7 @@ public class UserServiceImpl implements UserService {
             log.info(user.toString());
             return ResultVOUtil.Fail("注册失败，账号已存在");
         } else {
-            log.info(user.toString());
+            log.info("新注册的用户：" + user);
             userRepository.save(user);
             return ResultVOUtil.Success("用户注册或修改信息成功");
         }

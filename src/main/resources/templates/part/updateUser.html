@@ -73,8 +73,8 @@
             var params = $("form").serializeArray();
             event.preventDefault();
             $.ajax({
-                type: "post",
-                url: "/user/register",
+                type: "put",
+                url: "/user/updateuser",
                 data: params,
                 success: function (msg) {
                     if (msg.code == 0) {

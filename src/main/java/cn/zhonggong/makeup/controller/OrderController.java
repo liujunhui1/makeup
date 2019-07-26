@@ -42,4 +42,8 @@ public class OrderController {
         return orderService.save(order);
     }
 
+    @DeleteMapping("/deletebyid")
+    public ResultVO deleteById(@RequestParam(value = "id", required = true) int id) {
+        return orderService.deleteById(id);
+    }
 }

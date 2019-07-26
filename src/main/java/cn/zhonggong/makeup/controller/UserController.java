@@ -3,7 +3,9 @@ package cn.zhonggong.makeup.controller;
 import cn.zhonggong.makeup.domain.User;
 import cn.zhonggong.makeup.enums.UserTypeEnum;
 import cn.zhonggong.makeup.service.impl.UserServiceImpl;
+import cn.zhonggong.makeup.util.ResultVOUtil;
 import cn.zhonggong.makeup.vo.ResultVO;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -61,13 +63,14 @@ public class UserController {
     }
 
     @GetMapping("/index")
-    public ModelAndView Get_index() {
+    public ResultVO Get_index() {
         User CurrentUser = (User) httpSession.getAttribute("user");
         if (UserTypeEnum.USER_TYPE_ADMIN.getCode().equals(CurrentUser.getUserType())) {
             //TODO
             //非管理员账户不能登录后台页面
+            return ResultVOUtil.Success("管理员登录后台成功", 1, CurrentUser);
         }
-        return new ModelAndView("index");
+        return ResultVOUtil.Fail("非管理员账号不能登录后台");
     }
 
     @GetMapping("/findbyaccount")

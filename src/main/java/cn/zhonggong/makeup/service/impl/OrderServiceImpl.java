@@ -95,5 +95,15 @@ public class OrderServiceImpl implements OrderService {
     }
 
 
+    @Override
+    public ResultVO deleteById(int id) {
+        if (id <= 0) {
+            return ResultVOUtil.Fail("订单id有误");
+        } else {
+            orderRepository.deleteById(id);
+            return ResultVOUtil.Success("订单 " + id + " 删除成功", 1, id);
+        }
+
+    }
 }
 
