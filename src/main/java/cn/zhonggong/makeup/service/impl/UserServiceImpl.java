@@ -44,7 +44,8 @@ public class UserServiceImpl implements UserService {
         } else {
             log.info("新注册的用户：" + user);
             userRepository.save(user);
-            return ResultVOUtil.Success("用户注册或修改信息成功");
+            httpSession.setAttribute("user", user);
+            return ResultVOUtil.Success("用户注册成功", 1, user);
         }
 
     }
